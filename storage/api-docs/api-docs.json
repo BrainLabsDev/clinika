@@ -1,0 +1,3188 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API App - Clinica",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/show-history/cita-control/{user}": {
+            "get": {
+                "tags": [
+                    "cita-control"
+                ],
+                "summary": "Mostrando historial de cita de control del cliente",
+                "operationId": "showHistorialCitaControlUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing history of citas of control of the Client"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/cita-control/{user}": {
+            "get": {
+                "tags": [
+                    "cita-control"
+                ],
+                "summary": "Mostrando cita de control del cliente",
+                "operationId": "showCitaControlUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing cita of control of the Client"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/cita-control": {
+            "post": {
+                "tags": [
+                    "cita-control"
+                ],
+                "summary": "Crear cita de control",
+                "operationId": "createCitaControl",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "peso": {
+                                        "type": "integer"
+                                    },
+                                    "musculo": {
+                                        "type": "integer"
+                                    },
+                                    "grasas": {
+                                        "type": "integer"
+                                    },
+                                    "porcentaje_grasa": {
+                                        "type": "integer"
+                                    },
+                                    "cc": {
+                                        "type": "integer"
+                                    },
+                                    "grasa_viceral": {
+                                        "type": "integer"
+                                    },
+                                    "evolucion": {
+                                        "type": "string"
+                                    },
+                                    "cliente_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cita de control created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/update/cita-control/{cita}": {
+            "post": {
+                "tags": [
+                    "cita-control"
+                ],
+                "summary": "Actualizar cita de control",
+                "operationId": "updateCitaControl",
+                "parameters": [
+                    {
+                        "name": "cita",
+                        "in": "path",
+                        "description": "Id of the Cita de Control",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "peso": {
+                                        "type": "integer"
+                                    },
+                                    "musculo": {
+                                        "type": "integer"
+                                    },
+                                    "grasas": {
+                                        "type": "integer"
+                                    },
+                                    "porcentaje_grasa": {
+                                        "type": "integer"
+                                    },
+                                    "cc": {
+                                        "type": "integer"
+                                    },
+                                    "grasa_viceral": {
+                                        "type": "integer"
+                                    },
+                                    "evolucion": {
+                                        "type": "string"
+                                    },
+                                    "cliente_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cita de control updated"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/eliminar/cita-control/{cita}": {
+            "delete": {
+                "tags": [
+                    "cita-control"
+                ],
+                "summary": "Delete cita de control",
+                "operationId": "deleteCitaControl",
+                "parameters": [
+                    {
+                        "name": "cita",
+                        "in": "path",
+                        "description": "Id of the cita control",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cita control deleted succesfully"
+                    },
+                    "404": {
+                        "description": "Cita control not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login user",
+                "operationId": "loginUser",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Logout user",
+                "operationId": "logoutUser",
+                "responses": {
+                    "200": {
+                        "description": "User logged out"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/recover/password": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Reset password",
+                "operationId": "resetPassword",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/recover/custom-password": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Reset custom password",
+                "operationId": "resetCustomPassword",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/import/categorias": {
+            "post": {
+                "tags": [
+                    "importFile"
+                ],
+                "summary": "Importar Categorias del excel",
+                "operationId": "importCategorias",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file_excel": {
+                                        "description": "file_excel",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cateogries imported"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/categorias": {
+            "get": {
+                "tags": [
+                    "categoria-alimentos"
+                ],
+                "summary": "Mostrando todas las categorias",
+                "operationId": "showCategorias",
+                "responses": {
+                    "200": {
+                        "description": "Showing all categories"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/categoria/{categoria}": {
+            "get": {
+                "tags": [
+                    "categoria-alimentos"
+                ],
+                "summary": "Mostrando la categoria solicitada",
+                "operationId": "showCategoria",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "Id of Categoria",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing all categories"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/categoria/{categoria}/subcategorias": {
+            "get": {
+                "tags": [
+                    "categoria-alimentos"
+                ],
+                "summary": "Mostrando las subcategorias de la categoria solicitada",
+                "operationId": "showCategoriaSubcategorias",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "Id of Categoria",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing all subcategories of category"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/categoria/{categoria}/productos": {
+            "get": {
+                "tags": [
+                    "categoria-alimentos"
+                ],
+                "summary": "Mostrando los productos de la categoria solicitada",
+                "operationId": "showCategoriaProductos",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "Id of Categoria",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing all products of category"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/categoria": {
+            "post": {
+                "tags": [
+                    "categoria-alimentos"
+                ],
+                "summary": "Crear categoria",
+                "operationId": "createCategoria",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/update/categoria/{categoria}": {
+            "post": {
+                "tags": [
+                    "categoria-alimentos"
+                ],
+                "summary": "Actualizar categoria",
+                "operationId": "updateCategoria",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "Id of Categoria",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category updated"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/equivalencias-nutricionales/{citaControl}": {
+            "get": {
+                "tags": [
+                    "equivalencia-nutricional"
+                ],
+                "summary": "Obtener las equivalencias nutricionales de una cita de control",
+                "operationId": "showEquivalenciasNutricionales",
+                "parameters": [
+                    {
+                        "name": "citaControl",
+                        "in": "path",
+                        "description": "Id of Cita de Control",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing equivalencias nutricionales of a Cita de Control"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/equivalencia-nutricional/{equivalenciaNutricional}": {
+            "get": {
+                "tags": [
+                    "equivalencia-nutricional"
+                ],
+                "summary": "Obtener la equivalencia nutricional solicitada",
+                "operationId": "showEquivalenciaNutricional",
+                "parameters": [
+                    {
+                        "name": "equivalenciaNutricional",
+                        "in": "path",
+                        "description": "Id of Equivalencia Nutricional",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing equivalencia nutricional requested"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/equivalencia-nutricional": {
+            "post": {
+                "tags": [
+                    "equivalencia-nutricional"
+                ],
+                "summary": "Crear Equivalencia Nutricional",
+                "operationId": "createEquivalenciaNutricional",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "desayuno": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "media_mañana": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "almuerzo": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "media_tarde": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "cena": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "merienda_noche": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "cita_control_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "EquivalenciaNutricional created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/update/equivalencia-nutricional/{EquivalenciaNutricional}": {
+            "post": {
+                "tags": [
+                    "equivalencia-nutricional"
+                ],
+                "summary": "Actualizar equivalencia nutricional",
+                "operationId": "updateEquivalenciaNutricional",
+                "parameters": [
+                    {
+                        "name": "EquivalenciaNutricional",
+                        "in": "path",
+                        "description": "Id of Equivalencia Nutricional",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "desayuno": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "media_mañana": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "almuerzo": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "media_tarde": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "cena": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "merienda_noche": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "carbohidratos": {
+                                                    "type": "string"
+                                                },
+                                                "frutas": {
+                                                    "type": "string"
+                                                },
+                                                "vegetales": {
+                                                    "type": "string"
+                                                },
+                                                "lacteos": {
+                                                    "type": "string"
+                                                },
+                                                "proteinas": {
+                                                    "type": "string"
+                                                },
+                                                "grasas": {
+                                                    "type": "string",
+                                                    "format": "byte"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "cita_control_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consultorio created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show-last/equivalencia-nutricional/{user}": {
+            "get": {
+                "tags": [
+                    "equivalencia-nutricional"
+                ],
+                "summary": "Obtener las equivalencias nutricionales de una cita de control",
+                "operationId": "showLastEquivalenciaNutricional",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of the User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing equivalencias nutricionales of a Cita de Control requested"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar/equivalencia/{equivalenciaNutricional}": {
+            "get": {
+                "tags": [
+                    "equivalencia-nutricional"
+                ],
+                "summary": "Delete equivalencia nutricional",
+                "operationId": "deleteEquivalenciaNutricional",
+                "parameters": [
+                    {
+                        "name": "equivalenciaNutricional",
+                        "in": "path",
+                        "description": "Id of the Equivalencia Nutricional",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Equivalencia Nutricional deleted succesfully"
+                    },
+                    "404": {
+                        "description": "Equivalencia Nutrcional not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/objetivos": {
+            "get": {
+                "tags": [
+                    "Objetivos"
+                ],
+                "summary": "Mostrando los objetivos disponibles",
+                "operationId": "showObjetivos",
+                "responses": {
+                    "200": {
+                        "description": "Showing aviable Objetivos"
+                    },
+                    "403": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/objetivo/{objetivo}": {
+            "get": {
+                "tags": [
+                    "Objetivos"
+                ],
+                "summary": "Mostrando el objetivo",
+                "operationId": "showObjetivo",
+                "parameters": [
+                    {
+                        "name": "objetivo",
+                        "in": "path",
+                        "description": "Id of the Objetivo",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing specific Objetivo"
+                    },
+                    "403": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/objetivo": {
+            "post": {
+                "tags": [
+                    "Objetivos"
+                ],
+                "summary": "Crear objetivo",
+                "operationId": "createObjetivo",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Objetivo created successfully"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/update/objetivo/{objetivo}": {
+            "post": {
+                "tags": [
+                    "Objetivos"
+                ],
+                "summary": "Actualizar Objetivo",
+                "operationId": "updateObjetivo",
+                "parameters": [
+                    {
+                        "name": "objetivo",
+                        "in": "path",
+                        "description": "Id of the Objetivo",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Objetivo updated successfully"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/delete/objetivo/{objetivo}": {
+            "get": {
+                "tags": [
+                    "Objetivos"
+                ],
+                "summary": "Eliminando el objetivo",
+                "operationId": "deleteObjetivo",
+                "parameters": [
+                    {
+                        "name": "objetivo",
+                        "in": "path",
+                        "description": "Id of the Objetivo",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Objetivo deleted successfully"
+                    },
+                    "403": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/paypal/catalogo": {
+            "get": {
+                "tags": [
+                    "paypal-catalogos"
+                ],
+                "summary": "Mostrando los catalogos de paypal disponibles",
+                "operationId": "showCatalogos",
+                "responses": {
+                    "200": {
+                        "description": "Showing options of payment for Paypal"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "paypal-catalogos"
+                ],
+                "summary": "Mostrando los catalogos de paypal disponibles",
+                "operationId": "storeCatalogo",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "precio": {
+                                        "type": "integer"
+                                    },
+                                    "descuento": {
+                                        "type": "integer"
+                                    },
+                                    "periodo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Storing option of payment for Paypal"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/paypal/catalogo/{id}": {
+            "get": {
+                "tags": [
+                    "paypal-catalogos"
+                ],
+                "summary": "Mostrando los catalogos de paypal disponibles",
+                "operationId": "showCatalogo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of option Paypal",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing option of payment for Paypal"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "paypal-catalogos"
+                ],
+                "summary": "Eliminando catalogo de paypal",
+                "operationId": "deteleCatalogo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of option Paypal",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing options of payment for Paypal"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/actividades-fisicas": {
+            "get": {
+                "tags": [
+                    "ActividadFisica"
+                ],
+                "summary": "Mostrando las actividaddes fisicas disponibles",
+                "operationId": "showActividadesFisicas",
+                "responses": {
+                    "200": {
+                        "description": "Showing aviable Actividades Fisicas"
+                    },
+                    "403": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/actividad-fisica/{actividadFisica}": {
+            "get": {
+                "tags": [
+                    "ActividadFisica"
+                ],
+                "summary": "Mostrando la actividad fisica",
+                "operationId": "showActividadFisica",
+                "parameters": [
+                    {
+                        "name": "actividadFisica",
+                        "in": "path",
+                        "description": "Id of the Actividad Fisica",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing specific Actividad Fisica"
+                    },
+                    "403": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/actividad-fisica": {
+            "post": {
+                "tags": [
+                    "ActividadFisica"
+                ],
+                "summary": "Crear Actividad Fisica",
+                "operationId": "createActividadFisica",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Actividad Fisica created successfully"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/update/actividad-fisica/{actividadFisica}": {
+            "post": {
+                "tags": [
+                    "ActividadFisica"
+                ],
+                "summary": "Actualizar Actividad Fisica",
+                "operationId": "updateActividadFisica",
+                "parameters": [
+                    {
+                        "name": "actividadFisica",
+                        "in": "path",
+                        "description": "Id of the Actividad Fisica",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Actividad Fisica updated successfully"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/delete/actividad-fisica/{actividadFisica}": {
+            "get": {
+                "tags": [
+                    "ActividadFisica"
+                ],
+                "summary": "Eliminando la actividad fisica",
+                "operationId": "deleteActividadFisica",
+                "parameters": [
+                    {
+                        "name": "actividadFisica",
+                        "in": "path",
+                        "description": "Id of the Actividad Fisica",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Actividad Fisica deleted successfully"
+                    },
+                    "403": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/import/productos": {
+            "post": {
+                "tags": [
+                    "importFile"
+                ],
+                "summary": "Importar Productos del excel",
+                "operationId": "importProductos",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file_excel": {
+                                        "description": "file_excel",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Products imported"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/productos": {
+            "get": {
+                "tags": [
+                    "alimentos"
+                ],
+                "summary": "Mostrando todos los productos",
+                "operationId": "showProductos",
+                "responses": {
+                    "200": {
+                        "description": "Showing al products"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "Product not registered yet"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/producto/{producto}": {
+            "get": {
+                "tags": [
+                    "alimentos"
+                ],
+                "summary": "Mostrando el producto solicitado",
+                "operationId": "showProducto",
+                "parameters": [
+                    {
+                        "name": "producto",
+                        "in": "path",
+                        "description": "Id of Producto",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing product requested"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/producto": {
+            "post": {
+                "tags": [
+                    "alimentos"
+                ],
+                "summary": "Crear producto",
+                "operationId": "createProducto",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "cantidad_producto": {
+                                        "type": "string"
+                                    },
+                                    "intercambio_nutricional": {
+                                        "type": "string"
+                                    },
+                                    "detalles_adicionales": {
+                                        "type": "string"
+                                    },
+                                    "subcategoria_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Producto created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/update/producto/{producto}": {
+            "post": {
+                "tags": [
+                    "alimentos"
+                ],
+                "summary": "Actualziar producto",
+                "operationId": "updateProducto",
+                "parameters": [
+                    {
+                        "name": "producto",
+                        "in": "path",
+                        "description": "Id of Producto",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "cantidad_producto": {
+                                        "type": "string"
+                                    },
+                                    "intercambio_nutricional": {
+                                        "type": "string"
+                                    },
+                                    "detalles_adicionales": {
+                                        "type": "string"
+                                    },
+                                    "subcategoria_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Producto updated"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/delete/producto/{producto}": {
+            "delete": {
+                "tags": [
+                    "alimentos"
+                ],
+                "summary": "Delete producto",
+                "operationId": "deleteProducto",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of product",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Add Clients to the Consultorio requested"
+                    },
+                    "403": {
+                        "description": "User cant be assign to any Consultorio"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/set/nutricionista/{user}": {
+            "get": {
+                "tags": [
+                    "roles"
+                ],
+                "summary": "Asignando el rol de nutricionista a un usuario",
+                "operationId": "setNutricionista",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Setting user as nutricionista rol"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/roles": {
+            "get": {
+                "tags": [
+                    "roles"
+                ],
+                "summary": "Mostrando los roles disponibles",
+                "operationId": "showRoles",
+                "responses": {
+                    "200": {
+                        "description": "Setting user as nutricionista rol"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/consultorios": {
+            "get": {
+                "tags": [
+                    "Consultorio"
+                ],
+                "summary": "Obtener los consultorios",
+                "operationId": "showConsultorios",
+                "responses": {
+                    "200": {
+                        "description": "Showing consultorios"
+                    },
+                    "404": {
+                        "description": "No consultorios found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/consultorio/{consultorio}": {
+            "get": {
+                "tags": [
+                    "Consultorio"
+                ],
+                "summary": "Obtener el consultorio solicitado",
+                "operationId": "showConsultorio",
+                "parameters": [
+                    {
+                        "name": "consultorio",
+                        "in": "path",
+                        "description": "Id of consultorio",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing consultorio requested"
+                    },
+                    "404": {
+                        "description": "No consultorio found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/consultorio": {
+            "post": {
+                "tags": [
+                    "Consultorio"
+                ],
+                "summary": "Crear consultorio",
+                "operationId": "createConsultorio",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "direccion": {
+                                        "type": "string"
+                                    },
+                                    "telefono": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consultorio created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/update/consultorio/{consultorio}": {
+            "post": {
+                "tags": [
+                    "Consultorio"
+                ],
+                "summary": "Actualizar informacion del consultorio",
+                "operationId": "updateConsultorio",
+                "parameters": [
+                    {
+                        "name": "consultorio",
+                        "in": "path",
+                        "description": "Id of consultorio",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "direccion": {
+                                        "type": "string"
+                                    },
+                                    "telefono": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consultorio data updated"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/consultorio/{consultorio}/clientes": {
+            "get": {
+                "tags": [
+                    "Consultorio"
+                ],
+                "summary": "Obtener clientes del consultorio",
+                "operationId": "getClientesByConsultorioId",
+                "parameters": [
+                    {
+                        "name": "consultorio",
+                        "in": "path",
+                        "description": "Id of consultorio",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing Clients of the Consultorio requested"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/consultorio/{consultorio}/add-cliente/{user}": {
+            "get": {
+                "tags": [
+                    "Consultorio"
+                ],
+                "summary": "Agregar cliente al consultorio",
+                "operationId": "addClienteByConsultorioId",
+                "parameters": [
+                    {
+                        "name": "consultorio",
+                        "in": "path",
+                        "description": "Id of consultorio",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Add Clients to the Consultorio requested"
+                    },
+                    "403": {
+                        "description": "User cant be assign to any Consultorio"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/consultorio/{consultorio}": {
+            "delete": {
+                "tags": [
+                    "Consultorio"
+                ],
+                "summary": "Delete consultorio",
+                "operationId": "deleteConsultorioId",
+                "parameters": [
+                    {
+                        "name": "consultorio",
+                        "in": "path",
+                        "description": "Id of consultorio",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Add Clients to the Consultorio requested"
+                    },
+                    "403": {
+                        "description": "User cant be assign to any Consultorio"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/import/subcategorias": {
+            "post": {
+                "tags": [
+                    "importFile"
+                ],
+                "summary": "Importar Sucategorias del excel",
+                "operationId": "importSubcategorias",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file_excel": {
+                                        "description": "file_excel",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Subcategories imported"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/subcategorias": {
+            "get": {
+                "tags": [
+                    "subcategoria-alimentos"
+                ],
+                "summary": "Mostrando subcategorias de Alimentos",
+                "operationId": "showSubcategorias",
+                "responses": {
+                    "200": {
+                        "description": "Showing subcategories of Alimentos"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/subcategoria/{subcategoria}": {
+            "get": {
+                "tags": [
+                    "subcategoria-alimentos"
+                ],
+                "summary": "Mostrando la Subcategoria de Alimentos con su respectiva Categoria",
+                "operationId": "showSubcategory",
+                "parameters": [
+                    {
+                        "name": "subcategoria",
+                        "in": "path",
+                        "description": "Id of Subcategoria",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing subcategory of Alimentos with it respective Category"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/subcategoria": {
+            "post": {
+                "tags": [
+                    "subcategoria-alimentos"
+                ],
+                "summary": "Crear subcategoria",
+                "operationId": "createSubcategoria",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "categoria_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Subcategory created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/update/subcategoria/{subcategoria}": {
+            "post": {
+                "tags": [
+                    "subcategoria-alimentos"
+                ],
+                "summary": "Actualizar subcategoria",
+                "operationId": "updateSubcategoria",
+                "parameters": [
+                    {
+                        "name": "subcategoria",
+                        "in": "path",
+                        "description": "Id of Subcategoria",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "categoria_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Subcategory updated"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/subcategoria/{subcategoria}/productos": {
+            "get": {
+                "tags": [
+                    "subcategoria-alimentos"
+                ],
+                "summary": "Mostrando productos de una subcategoria",
+                "operationId": "showSubcategoryProducts",
+                "parameters": [
+                    {
+                        "name": "subcategoria",
+                        "in": "path",
+                        "description": "Id of Subcategoria",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing products of a subcategory"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/suscripcion/{user}": {
+            "get": {
+                "tags": [
+                    "suscripciones"
+                ],
+                "summary": "Mostrando suscripción del usuario",
+                "operationId": "showSuscripcionUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing suscripcion of the client"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/disable/suscripcion/{user}": {
+            "get": {
+                "tags": [
+                    "suscripciones"
+                ],
+                "summary": "Deshabilitando suscripcion del usuario",
+                "operationId": "disableSuscripcionUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Disable suscription of the client"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/enable/suscripcion/{user}": {
+            "get": {
+                "tags": [
+                    "suscripciones"
+                ],
+                "summary": "Habilitando suscripcion del usuario",
+                "operationId": "enableSuscripcionUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Enable suscription of the client"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/user/{user}": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Mostrando data del cliente",
+                "operationId": "showUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing personal information of Client"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/clientes": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Mostrando clientes",
+                "operationId": "showClientes",
+                "responses": {
+                    "200": {
+                        "description": "Showing list of Clientes"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/show/nutricionistas": {
+            "get": {
+                "tags": [
+                    "Nutricionista"
+                ],
+                "summary": "Mostrando nutricionistas",
+                "operationId": "showNutricionistas",
+                "responses": {
+                    "200": {
+                        "description": "Showing list of Nutricionistas"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/user": {
+            "post": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Crear cliente",
+                "operationId": "createUsers",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "apellido_paterno": {
+                                        "type": "string"
+                                    },
+                                    "apellido_materno": {
+                                        "type": "string"
+                                    },
+                                    "sexo": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "telefono": {
+                                        "type": "integer"
+                                    },
+                                    "fecha_nacimiento": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "nutricionista_id": {
+                                        "type": "integer"
+                                    },
+                                    "estatura": {
+                                        "type": "number",
+                                        "format": "double"
+                                    },
+                                    "consultorio_id": {
+                                        "type": "integer"
+                                    },
+                                    "registro_consumo": {
+                                        "type": "text"
+                                    },
+                                    "alergias[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "condiciones_medicas[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "actividad_fisica_id": {
+                                        "type": "integer"
+                                    },
+                                    "objetivo_id": {
+                                        "type": "integer"
+                                    },
+                                    "periodo_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/update/user/{user}": {
+            "post": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Actualizar informacion de nutricionista/cliente",
+                "operationId": "updateUsers",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of User",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "apellido_paterno": {
+                                        "type": "string"
+                                    },
+                                    "apellido_materno": {
+                                        "type": "string"
+                                    },
+                                    "sexo": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "telefono": {
+                                        "type": "integer"
+                                    },
+                                    "estatura": {
+                                        "type": "number",
+                                        "format": "double"
+                                    },
+                                    "fecha_nacimiento": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "nutricionista_id": {
+                                        "type": "integer"
+                                    },
+                                    "consultorio_id": {
+                                        "type": "integer"
+                                    },
+                                    "registro_consumo": {
+                                        "type": "text"
+                                    },
+                                    "alergias[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "condiciones_medicas[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "actividad_fisica_id": {
+                                        "type": "integer"
+                                    },
+                                    "objetivo_id": {
+                                        "type": "integer"
+                                    },
+                                    "periodo_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update data of nutricionista/cliente"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/create/nutricionista": {
+            "post": {
+                "tags": [
+                    "Nutricionista"
+                ],
+                "summary": "Crear nutricionista",
+                "operationId": "createNutricionista",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "rol": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Nutricionista created"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/update/nutricionista/{user}": {
+            "post": {
+                "tags": [
+                    "Nutricionista"
+                ],
+                "summary": "actualizar nutricionista",
+                "operationId": "updateNutricionista",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of Nutricionista",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "rol": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Nutricionista updated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation rules failed"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/show/users": {
+            "get": {
+                "tags": [
+                    "Nutricionista"
+                ],
+                "summary": "Mostrando clientes, nutricionistas y administradores",
+                "operationId": "showUsers",
+                "responses": {
+                    "200": {
+                        "description": "Showing personal information of Client"
+                    },
+                    "401": {
+                        "description": "User not authenticated"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/delete/user/{user}": {
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete user",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "Id of user",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Add Clients to the Consultorio requested"
+                    },
+                    "403": {
+                        "description": "User cant be assign to any Consultorio"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/check/user": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Check user if exist on DB",
+                "operationId": "checkUser",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Add Clients to the Consultorio requested"
+                    },
+                    "403": {
+                        "description": "User cant be assign to any Consultorio"
+                    },
+                    "404": {
+                        "description": "No clients found on the Consultorio"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    }
+}
