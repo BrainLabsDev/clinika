@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Room;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\Room;
@@ -100,6 +101,18 @@ class RoomController extends Controller
      *                  property="telefono",
      *                  type="string"
      *               ),
+     *               @OA\Property(
+     *                  property="cp",
+     *                  type="string"
+     *               ),
+     *              @OA\Property(
+     *                  property="estado",
+     *                  type="string"
+     *               ),
+     *              @OA\Property(
+     *                  property="pais",
+     *                  type="string"
+     *               ),
      *           ),
      *       )
      *     ),
@@ -135,8 +148,8 @@ class RoomController extends Controller
         $consultorio->lat = ($request->filled('lat')) ? $request->lat : null;
         $consultorio->lng = ($request->filled('lng')) ? $request->lng : null;
         $consultorio->cp = ($request->filled('cp')) ? $request->cp : null;
-        $consultorio->state = ($request->filled('state')) ? $request->state : null;
-        $consultorio->country = ($request->filled('country')) ? $request->country : null;
+        $consultorio->state = ($request->filled('estado')) ? $request->estado : null;
+        $consultorio->country = ($request->filled('pais')) ? $request->pais : null;
         $consultorio->save();
 
         return response()->json([
@@ -179,6 +192,18 @@ class RoomController extends Controller
      *                  property="telefono",
      *                  type="string"
      *               ),
+     *               @OA\Property(
+     *                  property="cp",
+     *                  type="string"
+     *               ),
+     *              @OA\Property(
+     *                  property="estado",
+     *                  type="string"
+     *               ),
+     *              @OA\Property(
+     *                  property="pais",
+     *                  type="string"
+     *               ),
      *           ),
      *       )
      *     ),
@@ -213,8 +238,8 @@ class RoomController extends Controller
         $consultorio->lat = ($request->filled('lat')) ? $request->lat : null;
         $consultorio->lng = ($request->filled('lng')) ? $request->lng : null;
         $consultorio->cp = ($request->filled('cp')) ? $request->cp : null;
-        $consultorio->state = ($request->filled('state')) ? $request->state : null;
-        $consultorio->country = ($request->filled('country')) ? $request->country : null;
+        $consultorio->state = ($request->filled('estado')) ? $request->estado : null;
+        $consultorio->country = ($request->filled('pais')) ? $request->pais : null;
         $consultorio->update();
 
         return response()->json([
@@ -253,7 +278,7 @@ class RoomController extends Controller
         $msg = null;
         $data = null;
         $code = 500;
-        $clientes = User::role('Usuario')->where('consultorio_id', $consultorio->id)->get();
+        $clientes = User::role('Usuario')->where('room_id', $consultorio->id)->get();
         if (!$clientes->isEmpty()) {
             $code = 200;
             $msg = 'Obteniendo ' . count($clientes) . ' clientes que pertenecen al consultorio: ' . $consultorio->name;
@@ -316,7 +341,7 @@ class RoomController extends Controller
      *     )
      * )
      */
-    public function addCliente(Request $request, Room $consultorio, User $encargado)
+    public function addCliente(Request $request, Room $consultorio)
     {
         $rules = [
             'email' => 'required|email',
@@ -343,7 +368,7 @@ class RoomController extends Controller
         $msg = null;
         $data = null;
 
-        if ($encargado->hasRole(['Admin', 'Nutricionista']) && $user->hasRole('Usuario')) {
+        if (Auth::user()->hasRole(['SuperAdmin', 'Admin', 'Nutricionista']) && $user->hasRole('Usuario')) {
             //In case  the patient already exist in another room, we need to remove it first
             $user->room_id = $consultorio->id;
             $user->save();
@@ -356,7 +381,7 @@ class RoomController extends Controller
 
         } else {
             $code = 403;
-            $msg = 'Este usuario no se puede asignar a un consultorio';
+            $msg = 'Este usuario no tiene privilegios para asignar pacientes a un consultorio';
         }
 
         return response()->json([
@@ -394,7 +419,7 @@ class RoomController extends Controller
     public function delete(Room $consultorio) {
         $data = null;
         // necesitamos verificar antes de borrar el consultorio si tiene pacientes asignados
-        $clientes = User::role('Usuario')->where('consultorio_id', $consultorio->id)->get();
+        $clientes = User::role('Usuario')->where('room_id', $consultorio->id)->get();
         if (!$clientes->isEmpty()){
             // Asignamos los pacientes a otro consultorio
             $backup = Room::where('id', '!=', $consultorio->id)->first();

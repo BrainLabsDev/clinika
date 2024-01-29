@@ -39,7 +39,7 @@ class RolController extends Controller
         $user->removeRole('Usuario');
         $user->assignRole('Nutricionista');
         $user->rol = 'Nutricionista';
-        $user->nutricionista_id = null;
+        $user->nutricionist_id = null;
         $user->update();
         return response()->json([
             'code' => 200,
