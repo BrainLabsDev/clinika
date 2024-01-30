@@ -100,10 +100,10 @@ Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario']
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/create/plan-nutricional', [NutritionPlansController::class, 'index']);
 
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista', EnsureSuscriptionIsValid::class])->get('/show/actividades-fisicas', [PhysicalActivityController::class, 'index']);
-Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista', EnsureSuscriptionIsValid::class])->get('/actividad-fisica/{$actividadFisica}', [PhysicalActivityController::class, 'show']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista', EnsureSuscriptionIsValid::class])->get('/show/actividad-fisica/{$actividadFisica}', [PhysicalActivityController::class, 'show']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/create/actividad-fisica', [PhysicalActivityController::class, 'store']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->patch('/actualizar/actividad/{$id}', [PhysicalActivityController::class, 'actualizar']);
-Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('/eliminar/fisica/{$actividadFisica}', [PhysicalActivityController::class, 'delete']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delete('/delete/actividad-fisica/{$actividadFisica}', [PhysicalActivityController::class, 'delete']);
 
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista', EnsureSuscriptionIsValid::class])->get('/show/objetivos', [ObjectiveController::class, 'index']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista', EnsureSuscriptionIsValid::class])->get('/show/objetivo/{$objetivo}', [ObjectiveController::class, 'show']);
