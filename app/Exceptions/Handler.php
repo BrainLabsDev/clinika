@@ -52,10 +52,8 @@ class Handler extends ExceptionHandler
     }
     public function render($request, Throwable $exception)
     {   
-        //dd($exception);
         if(stristr($request->getPathInfo(), 'api')){
             if($exception instanceof ValidationException){
-                //dd('here');
                 //return $this->convertValidationExceptionToResponse($exception,$request);
                 return $this->errorResponse($exception->getMessage(),$exception->errors(),$exception->status);
             }

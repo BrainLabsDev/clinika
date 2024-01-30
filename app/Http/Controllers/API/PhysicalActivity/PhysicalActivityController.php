@@ -49,7 +49,7 @@ class PhysicalActivityController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/show/actividad-fisica/{actividadFisica}",
+     *     path="/api/show/lobezno/{actividadFisica}",
      *     summary="Mostrando la actividad fisica",
      *     operationId="showActividadFisica",
      *     tags={"ActividadFisica"},

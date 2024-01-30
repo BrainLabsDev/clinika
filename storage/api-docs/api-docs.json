@@ -1565,7 +1565,7 @@
                 ]
             }
         },
-        "/api/show/actividad-fisica/{actividadFisica}": {
+        "/api/show/lobezno/{actividadFisica}": {
             "get": {
                 "tags": [
                     "ActividadFisica"
@@ -2134,6 +2134,15 @@
                                     },
                                     "telefono": {
                                         "type": "string"
+                                    },
+                                    "cp": {
+                                        "type": "string"
+                                    },
+                                    "estado": {
+                                        "type": "string"
+                                    },
+                                    "pais": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -2188,6 +2197,15 @@
                                         "type": "string"
                                     },
                                     "telefono": {
+                                        "type": "string"
+                                    },
+                                    "cp": {
+                                        "type": "string"
+                                    },
+                                    "estado": {
+                                        "type": "string"
+                                    },
+                                    "pais": {
                                         "type": "string"
                                     }
                                 },
@@ -2852,6 +2870,24 @@
                                         "items": {
                                             "type": "string"
                                         }
+                                    },
+                                    "medicinas[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "desordenes[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "historial": {
+                                        "type": "string"
+                                    },
+                                    "horas_dormidas": {
+                                        "type": "string"
                                     },
                                     "actividad_fisica_id": {
                                         "type": "integer"
