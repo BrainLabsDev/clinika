@@ -29,7 +29,9 @@ return [
         '76.76.21.21',
         'http://76.76.21.21',
         'https://76.76.21.21',
-        'https://clinika-demo-cr.netlify.app'
+        'https://clinika-demo-cr.netlify.app',
+        'https://clinika:8890',
+        'http://clinika:8890',
     ],
 
     'allowed_origins_patterns' => [],
