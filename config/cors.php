@@ -19,7 +19,18 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        env('FRONTEND_URL', 'http://localhost:3000'),
+        'http://localhost',
+        'capacitor://localhost',
+        'http://localhost:3000',
+        'https://localhost:3000',
+        'http://192.168.0.25:3000',
+        '76.76.21.21',
+        'http://76.76.21.21',
+        'https://76.76.21.21',
+        'https://clinika-demo-cr.netlify.app'
+    ],
 
     'allowed_origins_patterns' => [],
 
