@@ -146,11 +146,11 @@ class PaypalController extends Controller
 
         $paypal = new Paypal();
         $paypal->sku = Str::slug($request->nombre, '-');
-        $paypal->nombre = $request->nombre;
-        $paypal->representacion_numerica = $request->periodo;
-        $paypal->precio = (double) $request->precio;
+        $paypal->name = $request->nombre;
+        $paypal->months = $request->periodo;
+        $paypal->price = (double) $request->precio;
         if ($request->filled('descuento')) {
-            $paypal->descuento = (double) $request->descuento;
+            $paypal->discount = (double) $request->descuento;
         }
         $paypal->save();
 

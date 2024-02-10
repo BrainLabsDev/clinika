@@ -210,8 +210,8 @@ class PhysicalActivityController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $actividadFisica->nombre = $request->nombre;
-        $actividadFisica->descripcion = $request->descripcion;
+        $actividadFisica->name = $request->nombre;
+        $actividadFisica->description = $request->descripcion;
         $actividadFisica->sku = Str::slug($request->nombre, '-');
         $actividadFisica->save();
 
@@ -249,7 +249,7 @@ class PhysicalActivityController extends Controller
     */
     public function delete(PhysicalActivity $actividadFisica)
     {
-        //$actividadFisica->delete();
+        $actividadFisica->delete();
 
         return response()->json([
             'code' => 200,

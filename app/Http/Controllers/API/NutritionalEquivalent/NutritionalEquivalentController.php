@@ -37,7 +37,7 @@ class NutritionalEquivalentController extends Controller
     */
     public function index(Appoinment $citaControl)
     {
-        $equivalencias_nutricionales = NutritionEquivalent::where('cita_control_id',$citaControl->id)->get();
+        $equivalencias_nutricionales = NutritionEquivalent::where('appointment_id',$citaControl->id)->get();
 
         if ($equivalencias_nutricionales->isEmpty()) {
             return response()->json([
@@ -215,13 +215,13 @@ class NutritionalEquivalentController extends Controller
         }
 
         $equivalencia_nutricional = new NutritionEquivalent();
-        $equivalencia_nutricional->desayuno = ($request->filled('desayuno')) ? json_encode($request->desayuno) : null;
-        $equivalencia_nutricional->media_mañana = ($request->filled('media_mañana')) ? json_encode($request->media_mañana) : null;
-        $equivalencia_nutricional->almuerzo = ($request->filled('almuerzo')) ? json_encode($request->almuerzo) : null;
-        $equivalencia_nutricional->media_tarde = ($request->filled('media_tarde')) ? json_encode($request->media_tarde) : null;
-        $equivalencia_nutricional->cena = ($request->filled('cena')) ? json_encode($request->cena) : null;
-        $equivalencia_nutricional->merienda_noche = ($request->filled('merienda_noche')) ? json_encode($request->merienda_noche) : null;
-        $equivalencia_nutricional->cita_control_id = $citaControl->id;
+        $equivalencia_nutricional->breakfast = ($request->filled('desayuno')) ? json_encode($request->desayuno) : null;
+        $equivalencia_nutricional->mid_lunch = ($request->filled('media_mañana')) ? json_encode($request->media_mañana) : null;
+        $equivalencia_nutricional->lunch = ($request->filled('almuerzo')) ? json_encode($request->almuerzo) : null;
+        $equivalencia_nutricional->mid_dinner = ($request->filled('media_tarde')) ? json_encode($request->media_tarde) : null;
+        $equivalencia_nutricional->dinner = ($request->filled('cena')) ? json_encode($request->cena) : null;
+        $equivalencia_nutricional->snack = ($request->filled('merienda_noche')) ? json_encode($request->merienda_noche) : null;
+        $equivalencia_nutricional->appointment_id = $citaControl->id;
         $equivalencia_nutricional->save();
 
         return response()->json([
@@ -353,15 +353,15 @@ class NutritionalEquivalentController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $equivalenciaNutricional->desayuno = ($request->filled('desayuno')) ? json_encode($request->desayuno) : null;
-        $equivalenciaNutricional->media_mañana = ($request->filled('media_mañana')) ? json_encode($request->media_mañana) : null;
-        $equivalenciaNutricional->almuerzo = ($request->filled('almuerzo')) ? json_encode($request->almuerzo) : null;
-        $equivalenciaNutricional->media_tarde = ($request->filled('media_tarde')) ? json_encode($request->media_tarde) : null;
-        $equivalenciaNutricional->cena = ($request->filled('cena')) ? json_encode($request->cena) : null;
-        $equivalenciaNutricional->merienda_noche = ($request->filled('merienda_noche')) ? json_encode($request->merienda_noche) : null;
+        $equivalenciaNutricional->breakfast = ($request->filled('desayuno')) ? json_encode($request->desayuno) : null;
+        $equivalenciaNutricional->mid_lunch = ($request->filled('media_mañana')) ? json_encode($request->media_mañana) : null;
+        $equivalenciaNutricional->lunch = ($request->filled('almuerzo')) ? json_encode($request->almuerzo) : null;
+        $equivalenciaNutricional->mid_dinner = ($request->filled('media_tarde')) ? json_encode($request->media_tarde) : null;
+        $equivalenciaNutricional->dinner = ($request->filled('cena')) ? json_encode($request->cena) : null;
+        $equivalenciaNutricional->snack = ($request->filled('merienda_noche')) ? json_encode($request->merienda_noche) : null;
 
         $citaControl = Appoinment::findOrFail($request->cita_control_id);
-        $equivalenciaNutricional->cita_control_id = $citaControl->id;
+        $equivalenciaNutricional->appointment_id = $citaControl->id;
         $equivalenciaNutricional->update();
 
         return response()->json([
@@ -397,7 +397,7 @@ class NutritionalEquivalentController extends Controller
     */
     public function showLast(User $user)
     {
-         $cita = Appoinment::where('cliente_id', $user->id)->orderByDesc('fecha_cita')->first();
+         $cita = Appoinment::where('client_id', $user->id)->orderByDesc('date')->first();
 
          if ($cita == null) {
              return response()->json([
@@ -407,7 +407,7 @@ class NutritionalEquivalentController extends Controller
              ]);
          }
 
-        $equivalenciaNutricional = NutritionEquivalent::where('cita_control_id', $cita->id)->first();
+        $equivalenciaNutricional = NutritionEquivalent::where('appointment_id', $cita->id)->first();
 
         if ($equivalenciaNutricional == null) {
             return response()->json([

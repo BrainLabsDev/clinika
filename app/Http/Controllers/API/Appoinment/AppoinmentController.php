@@ -43,7 +43,7 @@ class AppoinmentController extends Controller
         $msg = 'Error inesperado';
         $data = null;
 
-        $citas = Appoinment::where('cliente_id', $user->id)->orderByDesc('fecha_cita')->get();
+        $citas = Appoinment::where('client_id', $user->id)->orderByDesc('date')->get();
         if ($citas->isEmpty()) {
             $code = 404;
             $msg = 'No hay citas de control';
@@ -91,7 +91,7 @@ class AppoinmentController extends Controller
         $msg = 'Error inesperado';
         $data = null;
 
-        $cita = Appoinment::where('cliente_id', $user->id)->orderByDesc('fecha_cita')->first();
+        $cita = Appoinment::where('client_id', $user->id)->orderByDesc('date')->first();
         if ($cita == null) {
             $code = 404;
             $msg = 'No hay citas de control';
@@ -215,7 +215,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $nutricionista = User::find($cliente->nutricionista_id);
+        $nutricionista = User::find($cliente->nutricionist_id);
         if ($nutricionista == null) {
             return response()->json([
                 'code' => 404,
@@ -248,16 +248,16 @@ class AppoinmentController extends Controller
 
 
         $cita = new Appoinment();
-        $cita->fecha_cita = now();
-        $cita->peso = (double) $request->peso;
-        $cita->musculo = (double) $request->musculo;
-        $cita->grasas = (double) $request->grasas;
-        $cita->porcentaje_grasa = (double) $request->porcentaje_grasa;
+        $cita->date = now();
+        $cita->weight = (double) $request->peso;
+        $cita->muscle = (double) $request->musculo;
+        $cita->fat = (double) $request->grasas;
+        $cita->average_fat = (double) $request->porcentaje_grasa;
         $cita->cc = (double) $request->cc;
-        $cita->grasa_viceral = (double) $request->grasa_viceral;
-        $cita->evolucion = $request->evolucion;
-        $cita->cliente_id = $cliente->id;
-        $cita->nutricionista_id = $nutricionista->id;
+        $cita->viseral_fat = (double) $request->grasa_viceral;
+        $cita->evolution = $request->evolucion;
+        $cita->client_id = $cliente->id;
+        $cita->nutricionist_id = $nutricionista->id;
         $cita->save();
 
         return response()->json([
@@ -379,7 +379,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $nutricionista = User::find($cliente->nutricionista_id);
+        $nutricionista = User::find($cliente->nutricionist_id);
         if ($nutricionista == null) {
             return response()->json([
                 'code' => 404,
@@ -407,15 +407,15 @@ class AppoinmentController extends Controller
 
 
         //$cita->fecha_cita = now();
-        $cita->peso = (double) $request->peso;
-        $cita->musculo = (double) $request->musculo;
-        $cita->grasas = (double) $request->grasas;
-        $cita->porcentaje_grasa = (double) $request->porcentaje_grasa;
+        $cita->weight = (double) $request->peso;
+        $cita->muscle = (double) $request->musculo;
+        $cita->fat = (double) $request->grasas;
+        $cita->average_fat = (double) $request->porcentaje_grasa;
         $cita->cc = (double) $request->cc;
-        $cita->grasa_viceral = (double) $request->grasa_viceral;
-        $cita->evolucion = $request->evolucion;
-        $cita->cliente_id = $cliente->id;
-        $cita->nutricionista_id = $nutricionista->id;
+        $cita->viseral_fat = (double) $request->grasa_viceral;
+        $cita->evolution = $request->evolucion;
+        $cita->client_id = $cliente->id;
+        $cita->nutricionist_id = $nutricionista->id;
         $cita->save();
 
         return response()->json([
@@ -456,7 +456,7 @@ class AppoinmentController extends Controller
     */
     public function deleteCita(Appoinment $cita)
     {
-        $equivalencia = NutritionEquivalent::where('cita_control_id', $cita->id)->first();
+        $equivalencia = NutritionEquivalent::where('appointment_id', $cita->id)->first();
 
         if ($equivalencia != null) {
             $equivalencia->delete();

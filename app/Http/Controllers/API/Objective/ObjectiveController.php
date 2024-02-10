@@ -141,8 +141,8 @@ class ObjectiveController extends Controller
         $this->validate($request, $rules, $messages);
 
         $objetivo = new Objective();
-        $objetivo->nombre = $request->nombre;
-        $objetivo->descripcion = $request->descripcion;
+        $objetivo->name = $request->nombre;
+        $objetivo->description = $request->descripcion;
         $objetivo->sku = Str::slug($request->nombre, '-');
         $objetivo->save();
 
@@ -210,8 +210,8 @@ class ObjectiveController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $objetivo->nombre = $request->nombre;
-        $objetivo->descripcion = $request->descripcion;
+        $objetivo->name = $request->nombre;
+        $objetivo->description = $request->descripcion;
         $objetivo->sku = Str::slug($request->nombre, '-');
         $objetivo->save();
 
