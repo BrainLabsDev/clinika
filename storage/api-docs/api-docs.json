@@ -2897,6 +2897,15 @@
                                     },
                                     "periodo_id": {
                                         "type": "string"
+                                    },
+                                    "num_identificacion": {
+                                        "type": "string"
+                                    },
+                                    "profesion": {
+                                        "type": "string"
+                                    },
+                                    "lugar_residencia": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -2993,6 +3002,15 @@
                                         "type": "integer"
                                     },
                                     "periodo_id": {
+                                        "type": "string"
+                                    },
+                                    "num_identificacion": {
+                                        "type": "string"
+                                    },
+                                    "profesion": {
+                                        "type": "string"
+                                    },
+                                    "lugar_residencia": {
                                         "type": "string"
                                     }
                                 },

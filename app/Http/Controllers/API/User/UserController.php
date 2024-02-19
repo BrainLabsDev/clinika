@@ -77,6 +77,9 @@ class UserController extends Controller
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
                 'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
+                'num_identificacion' => Auth::user()->dni,
+                'profesion' => Auth::user()->profesion,
+                'lugar_residencia' => Auth::user()->residence,
                 'suscripcion' => [
                     'id' => Auth::user()->suscripcion->id,
                     'empieza' => Auth::user()->suscripcion->start_date,
@@ -144,6 +147,9 @@ class UserController extends Controller
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
                 'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
+                'num_identificacion' => $user->dni,
+                'profesion' => $user->profesion,
+                'lugar_residencia' => $user->residence,
                 'nutricionista' => ($nutricionista != null ) ? ['id' => $nutricionista->id, 'nombre' => $nutricionista->name] : 'Sin nutricionista asignado',
                 'cita' => [
                     'fecha' => ($cita != null) ? $cita->date : null,
@@ -240,6 +246,9 @@ class UserController extends Controller
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
                 'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
+                'num_identificacion' => $cliente->dni,
+                'profesion' => $cliente->profesion,
+                'lugar_residencia' => $cliente->residence,
                 'suscripcion' => [
                     'id' => $cliente->suscripcion->id,
                     'empieza' => $cliente->suscripcion->start_date,
@@ -413,6 +422,18 @@ class UserController extends Controller
      *               @OA\Property(
      *                   property="periodo_id",
      *                   type="string"
+     *               ),
+     *               @OA\Property(
+     *                   property="num_identificacion",
+     *                   type="string"
+     *               ),
+     *                @OA\Property(
+     *                   property="profesion",
+     *                   type="string"
+     *               ),
+     *               @OA\Property(
+     *                   property="lugar_residencia",
+     *                   type="string"
      *               )
      *           ),
      *       )
@@ -499,6 +520,15 @@ class UserController extends Controller
 
         $user->nutricionist_id = $nutricionista_id;
         $user->room_id = $consultorio_id;
+        if ($request->has('num_identificacion') && $request->num_identificacion != null) {
+            $user->dni =$request->num_identificacion;
+        }
+        if ($request->has('profesion') && $request->profesion != null) {
+            $user->profesion = $request->profesion;
+        }
+        if ($request->has('lugar_residencia') && $request->lugar_residencia != null) {
+            $user->residence = $request->lugar_residencia;
+        }
         $user->save();
         // We assign the default rol to the user
         $user->assignRole('Usuario');
@@ -518,6 +548,7 @@ class UserController extends Controller
         if ($request->has('desordenes') && $request->desordenes != null) {
             $medical_record->health_conditions = (count($request->desordenes) > 0) ? json_encode($request->desordenes) : null;
         }
+
         $actividad_fisica = null;
         if ($request->has('actividad_fisica_id')) {
             $actividad_fisica = PhysicalActivity::find($request->actividad_fisica_id);
@@ -662,6 +693,18 @@ class UserController extends Controller
      *              @OA\Property(
      *                   property="periodo_id",
      *                   type="string"
+     *               ),
+     *              @OA\Property(
+     *                   property="num_identificacion",
+     *                   type="string"
+     *               ),
+     *                @OA\Property(
+     *                   property="profesion",
+     *                   type="string"
+     *               ),
+     *               @OA\Property(
+     *                   property="lugar_residencia",
+     *                   type="string"
      *               )
      *           ),
      *       )
@@ -705,6 +748,9 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone = $request->telefono;
         $user->birthday = $request->fecha_nacimiento;
+        $user->dni =$request->num_identificacion;
+        $user->profesion = $request->profesion;
+        $user->residence = $request->lugar_residencia;
         $user->sex = $request->sexo;
 
         $medical_record = MedicalRecord::where('user_id', $user->id)->first();
@@ -877,6 +923,9 @@ class UserController extends Controller
         $user->rol = $request->rol;
         $user->nutricionist_id = null;
         $user->room_id = null;
+        $user->dni = null;
+        $user->residence = null;
+        $user->profesion = null;
         $user->save();
 
         $user->assignRole($request->rol);
@@ -967,6 +1016,9 @@ class UserController extends Controller
         $user->rol = $request->rol;
         $user->nutricionista_id = null;
         $user->consultorio_id = null;
+        $user->dni = null;
+        $user->profesion = null;
+        $user->residence = null;
         $user->update();
 
         $user->assignRole($request->rol);
