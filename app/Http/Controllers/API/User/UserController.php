@@ -58,7 +58,7 @@ class UserController extends Controller
                 $nutricionista = User::find(Auth::user()->nutricionist_id);
             }
             $medical_record = MedicalRecord::where('user_id', $user->id)->first();
- 
+
             $user = [
                 'id' => Auth::user()->id,
                 'nombre' => Auth::user()->name,
@@ -69,7 +69,7 @@ class UserController extends Controller
                 'estatura' => ($medical_record == null) ? 0.0 :$medical_record->height,
                 'email' => Auth::user()->email,
                 'telefono' => Auth::user()->phone,
-                'registro_consumo' => ($medical_record == null) ? 'Sin registro de consumo' : $medical_record->consumption_record,
+                'registro_consumo' => ($medical_record == null) ? null : $medical_record->consumption_record,
                 'fecha_nacimiento' => Auth::user()->birthday,
                 'condiciones_medicas' => ($medical_record == null) ? null :$medical_record->health_conditions,
                 'alergias' => ($medical_record == null) ? null :$medical_record->alergias,
@@ -121,6 +121,7 @@ class UserController extends Controller
             $cita = Appoinment::where('client_id', $user->id)->orderByDesc('date')->first();
             $nutricionista = null;
             $medical_record = MedicalRecord::find($user->id);
+ 
             if ($user->nutricionist_id != null) {
                 $nutricionista = User::find($user->nutricionist_id);
             }
@@ -131,13 +132,18 @@ class UserController extends Controller
                 'apellido_materno' => $user->last_name,
                 'nombre_completo' => $user->name . ' ' . $user->first_name . ' ' . $user->last_name,
                 'sexo' => $user->sex,
-                'estatura' => $medical_record->height,
+                'estatura' => ($medical_record != null) ? $medical_record->height : 0.0,
                 'email' => $user->email,
                 'telefono' => $user->phone,
-                'registro_consumo' => $medical_record->consumption_record,
+                'registro_consumo' => ($medical_record != null) ? $medical_record->consumption_record : null,
+                'registro_consumo' => ($medical_record == null) ? null : $medical_record->consumption_record,
                 'fecha_nacimiento' => $user->birthday,
-                'condiciones_medicas' => $medical_record->health_conditions,
-                'alergias' => $medical_record->alergies,
+                'condiciones_medicas' => ($medical_record == null) ? null :$medical_record->health_conditions,
+                'alergias' => ($medical_record == null) ? null :$medical_record->alergias,
+                'historial' => ($medical_record == null) ? null : $medical_record->background,
+                'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
+                'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
+                'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
                 'nutricionista' => ($nutricionista != null ) ? ['id' => $nutricionista->id, 'nombre' => $nutricionista->name] : 'Sin nutricionista asignado',
                 'cita' => [
                     'fecha' => ($cita != null) ? $cita->date : null,
