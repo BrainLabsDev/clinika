@@ -520,15 +520,9 @@ class UserController extends Controller
 
         $user->nutricionist_id = $nutricionista_id;
         $user->room_id = $consultorio_id;
-        if ($request->has('num_identificacion') && $request->num_identificacion != null) {
-            $user->dni =$request->num_identificacion;
-        }
-        if ($request->has('profesion') && $request->profesion != null) {
-            $user->profesion = $request->profesion;
-        }
-        if ($request->has('lugar_residencia') && $request->lugar_residencia != null) {
-            $user->residence = $request->lugar_residencia;
-        }
+        $user->dni =($request->has('num_identificacion')) ? $request->num_identificacion : null;
+        $user->profesion = ($request->has('profesion'))  ? $request->profesion : null;
+        $user->residence = ($request->has('lugar_residencia')) ?  $request->lugar_residencia : null;
         $user->save();
         // We assign the default rol to the user
         $user->assignRole('Usuario');
