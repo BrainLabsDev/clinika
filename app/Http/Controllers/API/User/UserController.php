@@ -131,9 +131,9 @@ class UserController extends Controller
             $usuario = [
                 'id' => $user->id,
                 'nombre' => $user->name,
-                'apellido_paterno' => $user->first_name,
-                'apellido_materno' => $user->last_name,
-                'nombre_completo' => $user->name . ' ' . $user->first_name . ' ' . $user->last_name,
+                'apellido_paterno' => $user->first_lastname,
+                'apellido_materno' => $user->second_lastname,
+                'nombre_completo' => $user->name . ' ' . $user->first_lastname . ' ' . $user->second_lastname,
                 'sexo' => $user->sex,
                 'estatura' => ($medical_record != null) ? $medical_record->height : 0.0,
                 'email' => $user->email,
