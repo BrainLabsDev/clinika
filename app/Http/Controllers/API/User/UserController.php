@@ -123,8 +123,8 @@ class UserController extends Controller
 
             $cita = Appoinment::where('client_id', $user->id)->orderByDesc('date')->first();
             $nutricionista = null;
-            $medical_record = MedicalRecord::find($user->id);
- 
+            $medical_record = MedicalRecord::where('user_id',$user->id)->first();
+
             if ($user->nutricionist_id != null) {
                 $nutricionista = User::find($user->nutricionist_id);
             }
