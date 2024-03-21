@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $table = "categories";
+    protected $table = "category";
 
     protected $fillable = [
-        'name',
-        'icon'
+        'name'
     ];
 
     protected $hidden = [
@@ -23,11 +22,6 @@ class Category extends Model
 
     public function subcategorias()
     {
-        return $this->hasMany(Subcategoria::class);
-    }
-
-    public function productos()
-    {
-        return $this->hasManyThrough(Producto::class, Subcategoria::class, 'categoria_id', 'subcategoria_id');
+        return $this->hasMany(Subcategory::class);
     }
 }

@@ -16,6 +16,7 @@ use App\Models\Objective;
 use App\Models\Address;
 use App\Models\Paypal;
 use App\Models\Room;
+use App\Models\Subcategory;
 use App\Models\User;
 
 /**
@@ -79,6 +80,7 @@ class UserController extends Controller
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
                 'num_identificacion' => Auth::user()->dni,
                 'profesion' => Auth::user()->profesion,
+                'estado_civil' => ($medical_record == null) ? null : $medical_record->civil_status,
                 'lugar_residencia' => Auth::user()->residence,
                 'suscripcion' => [
                     'id' => Auth::user()->suscripcion->id,
@@ -109,6 +111,31 @@ class UserController extends Controller
                     'nombre' => Auth::user()->actividadFisica->name,
                     'descripcion' => Auth::user()->actividadFisica->description,
                 ];
+            }
+
+            if ($medical_record != null && $medical_record->alcohol_consumption != null) {
+                $subcategory = Subcategory::find($medical_record->alcohol_consumption);
+                $user['consumo_alcohol'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->smoke != null) {
+                $subcategory = Subcategory::find($medical_record->smoke);
+                $user['fumador'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->water_consumption != null) {
+                $subcategory = Subcategory::find($medical_record->water_consumption);
+                $user['consumo_de_agua_diario'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->stress != null) {
+                $subcategory = Subcategory::find($medical_record->stress);
+                $user['estres_general'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->hours_of_sleep != null) {
+                $subcategory = Subcategory::find($medical_record->hours_of_sleep);
+                $user['horas_de_sueño'] = $subcategory->description;
             }
 
             return response()->json([
@@ -147,6 +174,7 @@ class UserController extends Controller
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
                 'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
+                'estado_civil' => ($medical_record == null) ? null : $medical_record->civil_status,
                 'num_identificacion' => $user->dni,
                 'profesion' => $user->profesion,
                 'lugar_residencia' => $user->residence,
@@ -188,6 +216,31 @@ class UserController extends Controller
                     'nombre' => $user->actividadFisica->name,
                     'descripcion' => $user->actividadFisica->description,
                 ];
+            }
+
+            if ($medical_record != null && $medical_record->alcohol_consumption != null) {
+                $subcategory = Subcategory::find($medical_record->alcohol_consumption);
+                $user['consumo_alcohol'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->smoke != null) {
+                $subcategory = Subcategory::find($medical_record->smoke);
+                $user['fumador'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->water_consumption != null) {
+                $subcategory = Subcategory::find($medical_record->water_consumption);
+                $user['consumo_de_agua_diario'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->stress != null) {
+                $subcategory = Subcategory::find($medical_record->stress);
+                $user['estres_general'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->hours_of_sleep != null) {
+                $subcategory = Subcategory::find($medical_record->hours_of_sleep);
+                $user['horas_de_sueño'] = $subcategory->description;
             }
 
             return response()->json([
@@ -246,6 +299,7 @@ class UserController extends Controller
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
                 'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
+                'estado_civil' => ($medical_record == null) ? null : $medical_record->civil_status,
                 'num_identificacion' => $cliente->dni,
                 'profesion' => $cliente->profesion,
                 'lugar_residencia' => $cliente->residence,
@@ -278,6 +332,31 @@ class UserController extends Controller
                     'nombre' => $cliente->actividadFisica->name,
                     'descripcion' => $cliente->actividadFisica->description,
                 ];
+            }
+
+            if ($medical_record != null && $medical_record->alcohol_consumption != null) {
+                $subcategory = Subcategory::find($medical_record->alcohol_consumption);
+                $user['consumo_alcohol'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->smoke != null) {
+                $subcategory = Subcategory::find($medical_record->smoke);
+                $user['fumador'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->water_consumption != null) {
+                $subcategory = Subcategory::find($medical_record->water_consumption);
+                $user['consumo_de_agua_diario'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->stress != null) {
+                $subcategory = Subcategory::find($medical_record->stress);
+                $user['estres_general'] = $subcategory->description;
+            }
+
+            if ($medical_record != null && $medical_record->hours_of_sleep != null) {
+                $subcategory = Subcategory::find($medical_record->hours_of_sleep);
+                $user['horas_de_sueño'] = $subcategory->description;
             }
 
             array_push($users, $user);
@@ -543,6 +622,9 @@ class UserController extends Controller
         if ($request->has('desordenes') && $request->desordenes != null) {
             $medical_record->health_conditions = (count($request->desordenes) > 0) ? json_encode($request->desordenes) : null;
         }
+        if ($request->has('estado_civil') && $request->estado_civil != null) {
+            $medical_record->civil_status = (count($request->estado_civil) > 0) ? json_encode($request->estado_civil) : null;
+        }
 
         $actividad_fisica = null;
         if ($request->has('actividad_fisica_id')) {
@@ -573,6 +655,32 @@ class UserController extends Controller
         $medical_record->objective_id = ($request->has('objetivo_id') ? $objetivo->id : null);
         $medical_record->physical_activity_id = ($request->has('actividad_fisica_id') ? $actividad_fisica->id : null);
         $medical_record->user_id = $user->id;
+
+        if ($request->filled('consumo_alcohol')) {
+            $subcategory = Subcategory::find($request->consumo_alcohol);
+            $medical_record->alcohol_consumption = $subcategory->id;
+        }
+
+        if ($request->filled('fumador')) {
+            $subcategory = Subcategory::find($request->fumador);
+            $medical_record->smoke = $subcategory->id;
+        }
+
+        if ($request->filled('consumo_agua')) {
+            $subcategory = Subcategory::find($request->consumo_agua);
+            $medical_record->water_consumption = $subcategory->id;
+        }
+
+        if ($request->filled('estres')) {
+            $subcategory = Subcategory::find($request->estres);
+            $medical_record->stress = $subcategory->id;
+        }
+
+        if ($request->filled('horas_de_sueño')) {
+            $subcategory = Subcategory::find($request->horas_de_sueño);
+            $medical_record->hours_of_sleep = $subcategory->id;
+        }
+
         $medical_record->save();
 
         // We check if the register its comming from Paypal
@@ -814,6 +922,33 @@ class UserController extends Controller
         $user->update();
         $medical_record->objective_id = ($request->has('objetivo_id') ? $objetivo->id : $medical_record->objective_id);
         $medical_record->physical_activity_id = ($request->has('actividad_fisica_id') ? $actividad_fisica->id : $medical_record->physical_activity_id);
+        $medical_record->civil_status = ($request->has('estado_civil') ? $request->estado_civil : $medical_record->civil_statu);
+
+        if ($request->filled('consumo_alcohol')) {
+            $subcategory = Subcategory::find($request->consumo_alcohol);
+            $medical_record->alcohol_consumption = $subcategory->id;
+        }
+
+        if ($request->filled('fumador')) {
+            $subcategory = Subcategory::find($request->fumador);
+            $medical_record->smoke = $subcategory->id;
+        }
+
+        if ($request->filled('consumo_agua')) {
+            $subcategory = Subcategory::find($request->consumo_agua);
+            $medical_record->water_consumption = $subcategory->id;
+        }
+
+        if ($request->filled('estres')) {
+            $subcategory = Subcategory::find($request->estres);
+            $medical_record->stress = $subcategory->id;
+        }
+
+        if ($request->filled('horas_de_sueño')) {
+            $subcategory = Subcategory::find($request->horas_de_sueño);
+            $medical_record->hours_of_sleep = $subcategory->id;
+        }
+
         $medical_record->save();
         
 

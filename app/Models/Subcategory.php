@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subcategory extends Model
 {
     use HasFactory;
-    protected $table = "subcategories";
+    protected $table = "subcategory";
 
     protected $fillable = [
         'name',
@@ -24,10 +24,5 @@ class Subcategory extends Model
     public function categoria()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function productos()
-    {
-        return $this->hasMany(Product::class);
     }
 }
