@@ -2906,6 +2906,24 @@
                                     },
                                     "lugar_residencia": {
                                         "type": "string"
+                                    },
+                                    "estado_civil": {
+                                        "type": "string"
+                                    },
+                                    "consumo_acohol": {
+                                        "type": "integer"
+                                    },
+                                    "fumador": {
+                                        "type": "integer"
+                                    },
+                                    "consumo_agua": {
+                                        "type": "integer"
+                                    },
+                                    "estres": {
+                                        "type": "integer"
+                                    },
+                                    "horas_de_sueño": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -3012,6 +3030,24 @@
                                     },
                                     "lugar_residencia": {
                                         "type": "string"
+                                    },
+                                    "estado_civil": {
+                                        "type": "string"
+                                    },
+                                    "consumo_acohol": {
+                                        "type": "integer"
+                                    },
+                                    "fumador": {
+                                        "type": "integer"
+                                    },
+                                    "consumo_agua": {
+                                        "type": "integer"
+                                    },
+                                    "estres": {
+                                        "type": "integer"
+                                    },
+                                    "horas_de_sueño": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"

@@ -516,11 +516,7 @@ class UserController extends Controller
      *               ),
      *               @OA\Property(
      *                   property="estado_civil",
-     *                   type="string",
-     *                   @allowableValues(
-     *                      valueType="LIST",
-     *                         values="['Soltero/a', 'Casado/a', 'Viudo/a', 'Divorciado/a', 'Unión Libre']"
-     *                   )
+     *                   type="string"
      *               ),
      *              @OA\Property(
      *                   property="consumo_acohol",
@@ -839,11 +835,7 @@ class UserController extends Controller
      *               ),
      *               @OA\Property(
      *                   property="estado_civil",
-     *                   type="string",
-     *                   @allowableValues(
-     *                      valueType="LIST",
-     *                         values="['Soltero/a', 'Casado/a', 'Viudo/a', 'Divorciado/a', 'Unión Libre']"
-     *                   )
+     *                   type="string"
      *               ),
      *              @OA\Property(
      *                   property="consumo_acohol",
