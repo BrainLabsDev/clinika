@@ -513,7 +513,35 @@ class UserController extends Controller
      *               @OA\Property(
      *                   property="lugar_residencia",
      *                   type="string"
-     *               )
+     *               ),
+     *               @OA\Property(
+     *                   property="estado_civil",
+     *                   type="string",
+     *                   @allowableValues(
+     *                      valueType="LIST",
+     *                         values="['Soltero/a', 'Casado/a', 'Viudo/a', 'Divorciado/a', 'Unión Libre']"
+     *                   )
+     *               ),
+     *              @OA\Property(
+     *                   property="consumo_acohol",
+     *                   type="integer",
+     *              ),
+     *              @OA\Property(
+     *                   property="fumador",
+     *                   type="integer",
+     *              ),
+     *              @OA\Property(
+     *                   property="consumo_agua",
+     *                   type="integer",
+     *              ),
+     *              @OA\Property(
+     *                   property="estres",
+     *                   type="integer",
+     *              ),
+     *              @OA\Property(
+     *                   property="horas_de_sueño",
+     *                   type="integer",
+     *              )
      *           ),
      *       )
      *     ),
@@ -808,7 +836,35 @@ class UserController extends Controller
      *               @OA\Property(
      *                   property="lugar_residencia",
      *                   type="string"
-     *               )
+     *               ),
+     *               @OA\Property(
+     *                   property="estado_civil",
+     *                   type="string",
+     *                   @allowableValues(
+     *                      valueType="LIST",
+     *                         values="['Soltero/a', 'Casado/a', 'Viudo/a', 'Divorciado/a', 'Unión Libre']"
+     *                   )
+     *               ),
+     *              @OA\Property(
+     *                   property="consumo_acohol",
+     *                   type="integer",
+     *              ),
+     *              @OA\Property(
+     *                   property="fumador",
+     *                   type="integer",
+     *              ),
+     *              @OA\Property(
+     *                   property="consumo_agua",
+     *                   type="integer",
+     *              ),
+     *              @OA\Property(
+     *                   property="estres",
+     *                   type="integer",
+     *              ),
+     *              @OA\Property(
+     *                   property="horas_de_sueño",
+     *                   type="integer",
+     *              )
      *           ),
      *       )
      *     ),
