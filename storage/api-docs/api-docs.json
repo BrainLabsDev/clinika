@@ -640,6 +640,31 @@
                 ]
             }
         },
+        "/api/show-categories/{citaControl}": {
+            "get": {
+                "tags": [
+                    "medical-conditions"
+                ],
+                "summary": "Obtener nuevas condiciones medicas",
+                "operationId": "showMedicalConditions",
+                "responses": {
+                    "200": {
+                        "description": "Showing medical conditions"
+                    },
+                    "404": {
+                        "description": "No medical conditions found"
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/show/equivalencias-nutricionales/{citaControl}": {
             "get": {
                 "tags": [

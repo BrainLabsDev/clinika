@@ -9,6 +9,22 @@ use Illuminate\Http\Request;
 
 class MedicalConditionsController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/show-categories/{citaControl}",
+     *     summary="Obtener nuevas condiciones medicas",
+     *     operationId="showMedicalConditions",
+     *     tags={"medical-conditions"},
+     *     security={ {"sanctum": {} }},
+     *     @OA\Response(response=200, description="Showing medical conditions"),
+     *     @OA\Response(response=404, description="No medical conditions found"),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+    */
     public function index()
     {
         $categorias = [];
