@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('medical_records', function (Blueprint $table) {
-            $table->integer('alcohol_consumption')->default(null);
-            $table->integer('smoke')->default(null);
-            $table->integer('water_consumption')->default(null);
-            $table->integer('stress')->default(null);
-            $table->integer('hours_of_sleep')->default(null);
+            $table->integer('alcohol_consumption')->default(null)->nullable();
+            $table->integer('smoke')->default(null)->nullable();
+            $table->integer('water_consumption')->default(null)->nullable();
+            $table->integer('stress')->default(null)->nullable();
+            $table->integer('hours_of_sleep')->default(null)->nullable();
+            $table->integer('physical_activity')->default(null)->nullable();
+            $table->integer('objective')->default(null)->nullable();
         });
     }
 

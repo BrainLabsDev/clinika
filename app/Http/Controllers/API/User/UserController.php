@@ -96,45 +96,60 @@ class UserController extends Controller
                 ],
             ];
 
-            if (Auth::user()->objetivo != null) {
+            if ($medical_record != null && $medical_record->objective != null) {
+                $subcategory = Subcategory::find($medical_record->objective);
                 $user['objetivo'] = [
-                    'id' => Auth::user()->objetivo->id,
-                    'nombre' => Auth::user()->objetivo->name,
-                    'descripcion' => Auth::user()->objetivo->description,
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
                 ];
             }
 
-            if (Auth::user()->actividadFisica != null) {
+            if ($medical_record != null && $medical_record->physical_activity != null) {
+                $subcategory = Subcategory::find($medical_record->physical_activity);
                 $user['actividad_fisica'] = [
-                    'id' => Auth::user()->actividadFisica->id,
-                    'nombre' => Auth::user()->actividadFisica->name,
-                    'descripcion' => Auth::user()->actividadFisica->description,
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
                 ];
             }
 
             if ($medical_record != null && $medical_record->alcohol_consumption != null) {
                 $subcategory = Subcategory::find($medical_record->alcohol_consumption);
-                $user['consumo_alcohol'] = $subcategory->description;
+                $user['consumo_alcohol'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->smoke != null) {
                 $subcategory = Subcategory::find($medical_record->smoke);
-                $user['fumador'] = $subcategory->description;
+                $user['fumador'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->water_consumption != null) {
                 $subcategory = Subcategory::find($medical_record->water_consumption);
-                $user['consumo_de_agua_diario'] = $subcategory->description;
+                $user['consumo_de_agua_diario'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->stress != null) {
                 $subcategory = Subcategory::find($medical_record->stress);
-                $user['estres_general'] = $subcategory->description;
+                $user['estres_general'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->hours_of_sleep != null) {
                 $subcategory = Subcategory::find($medical_record->hours_of_sleep);
-                $user['horas_de_sueño'] = $subcategory->description;
+                $user['horas_de_sueño'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             return response()->json([
@@ -200,45 +215,60 @@ class UserController extends Controller
                 ];
             }
 
-            if ($user->objetivo != null) {
-                $usuario['objetivo'] = [
-                    'id' => $user->objetivo->id,
-                    'nombre' => $user->objetivo->name,
-                    'descripcion' => $user->objetivo->description,
+            if ($medical_record != null && $medical_record->objective != null) {
+                $subcategory = Subcategory::find($medical_record->objective);
+                $user['objetivo'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
                 ];
             }
 
-            if ($user->actividadFisica != null) {
-                $usuario['actividad_fisica'] = [
-                    'id' => $user->actividadFisica->id,
-                    'nombre' => $user->actividadFisica->name,
-                    'descripcion' => $user->actividadFisica->description,
+            if ($medical_record != null && $medical_record->physical_activity != null) {
+                $subcategory = Subcategory::find($medical_record->physical_activity);
+                $user['actividad_fisica'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
                 ];
             }
 
             if ($medical_record != null && $medical_record->alcohol_consumption != null) {
                 $subcategory = Subcategory::find($medical_record->alcohol_consumption);
-                $user['consumo_alcohol'] = $subcategory->description;
+                $user['consumo_alcohol'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->smoke != null) {
                 $subcategory = Subcategory::find($medical_record->smoke);
-                $user['fumador'] = $subcategory->description;
+                $user['fumador'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->water_consumption != null) {
                 $subcategory = Subcategory::find($medical_record->water_consumption);
-                $user['consumo_de_agua_diario'] = $subcategory->description;
+                $user['consumo_de_agua_diario'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->stress != null) {
                 $subcategory = Subcategory::find($medical_record->stress);
-                $user['estres_general'] = $subcategory->description;
+                $user['estres_general'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->hours_of_sleep != null) {
                 $subcategory = Subcategory::find($medical_record->hours_of_sleep);
-                $user['horas_de_sueño'] = $subcategory->description;
+                $user['horas_de_sueño'] = [
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             return response()->json([
@@ -315,45 +345,60 @@ class UserController extends Controller
                 ],
             ];
 
-            if ($cliente->objetivo != null) {
-                $user['objetivo'] = [
-                    'id' => $cliente->objetivo->id,
-                    'nombre' => $cliente->objetivo->name,
-                    'descripcion' => $cliente->objetivo->description,
+            if ($medical_record != null && $medical_record->physical_activity != null) {
+                $subcategory = Subcategory::find($medical_record->physical_activity);
+                $user['actividad_fisica'] =[
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
                 ];
             }
 
-            if ($cliente->actividadFisica != null) {
-                $user['actividad_fisica'] = [
-                    'id' => $cliente->actividadFisica->id,
-                    'nombre' => $cliente->actividadFisica->name,
-                    'descripcion' => $cliente->actividadFisica->description,
+            if ($medical_record != null && $medical_record->objective != null) {
+                $subcategory = Subcategory::find($medical_record->objective);
+                $user['objetivo'] =[
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
                 ];
             }
 
             if ($medical_record != null && $medical_record->alcohol_consumption != null) {
                 $subcategory = Subcategory::find($medical_record->alcohol_consumption);
-                $user['consumo_alcohol'] = $subcategory->description;
+                $user['consumo_alcohol'] =[
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->smoke != null) {
                 $subcategory = Subcategory::find($medical_record->smoke);
-                $user['fumador'] = $subcategory->description;
+                $user['fumador'] =[
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->water_consumption != null) {
                 $subcategory = Subcategory::find($medical_record->water_consumption);
-                $user['consumo_de_agua_diario'] = $subcategory->description;
+                $user['consumo_de_agua_diario'] =[
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->stress != null) {
                 $subcategory = Subcategory::find($medical_record->stress);
-                $user['estres_general'] = $subcategory->description;
+                $user['estres_general'] =[
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             if ($medical_record != null && $medical_record->hours_of_sleep != null) {
                 $subcategory = Subcategory::find($medical_record->hours_of_sleep);
-                $user['horas_de_sueño'] = $subcategory->description;
+                $user['horas_de_sueño'] =[
+                    'descripcion' => $subcategory->description,
+                    'id' => $subcategory->id
+                ];
             }
 
             array_push($users, $user);
@@ -631,50 +676,26 @@ class UserController extends Controller
         // If thre register is full we will recieve more information in the register
         // This extra information goes on a medical record
         $medical_record = new MedicalRecord();
-        if ($request->has('alergias') && $request->alergias != null) {
-            $medical_record->alergies = (count($request->alergias) > 0) ? json_encode($request->alergias) : null;
+
+        $medical_record->alergies = (($request->filled('alergias')) && count($request->alergias) > 0) ? json_encode($request->alergias) : null;
+        $medical_record->health_conditions = (($request->filled('condiciones_medicas')) && count($request->condiciones_medicas) > 0) ? json_encode($request->condiciones_medicas) : null;
+        $medical_record->health_conditions = ($request->filled('medicinas') && count($request->medicinas) > 0) ? json_encode($request->medicinas) : null;
+        $medical_record->health_conditions = ($request->filled('desordenes') && count($request->desordenes) > 0) ? json_encode($request->desordenes) : null;
+        $medical_record->civil_status = ($request->filled('estado_civil')) ? $request->estado_civil : null;
+        
+
+        if ($request->filled('actividad_fisica_id')) {
+            $subcategory = Subcategory::find($request->actividad_fisica_id);
+            $medical_record->physical_activity = $subcategory->id;
         }
-        if ($request->has('condiciones_medicas') && $request->condiciones_medicas != null) {
-            $medical_record->health_conditions = (count($request->condiciones_medicas) > 0) ? json_encode($request->condiciones_medicas) : null;
-        }
-        if ($request->has('medicinas') && $request->medicinas != null) {
-            $medical_record->health_conditions = (count($request->medicinas) > 0) ? json_encode($request->medicinas) : null;
-        }
-        if ($request->has('desordenes') && $request->desordenes != null) {
-            $medical_record->health_conditions = (count($request->desordenes) > 0) ? json_encode($request->desordenes) : null;
-        }
-        if ($request->has('estado_civil') && $request->estado_civil != null) {
-            $medical_record->civil_status = (count($request->estado_civil) > 0) ? json_encode($request->estado_civil) : null;
+        if ($request->filled('objetivo_id')) {
+            $subcategory = Subcategory::find($request->objetivo_id);
+            $medical_record->objective_id = $subcategory->id;
         }
 
-        $actividad_fisica = null;
-        if ($request->has('actividad_fisica_id')) {
-            $actividad_fisica = PhysicalActivity::find($request->actividad_fisica_id);
-            if ($actividad_fisica == null) {
-                return response()->json([
-                    'code' => 404,
-                    'msg' => 'Actividad fisica que estas tratando de asignar no existe.',
-                    'data' => null
-                ]);
-            }
-        }
-        $objetivo = null;
-        if ($request->has('objetivo_id')) {
-            $objetivo = Objective::find($request->objetivo_id);
-            if ($objetivo == null) {
-                return response()->json([
-                    'code' => 404,
-                    'msg' => 'Objetivo que estas tratando de asignar no existe.',
-                    'data' => null
-                ]);
-            }
-        }
-        
         $medical_record->background = ($request->filled('historial')) ? $request->historial : null;
         $medical_record->consumption_record = ($request->filled('registro_consumo')) ? $request->registro_consumo : null;
         $medical_record->height = ($request->filled('estatura')) ? $request->estatura : 0.0;
-        $medical_record->objective_id = ($request->has('objetivo_id') ? $objetivo->id : null);
-        $medical_record->physical_activity_id = ($request->has('actividad_fisica_id') ? $actividad_fisica->id : null);
         $medical_record->user_id = $user->id;
 
         if ($request->filled('consumo_alcohol')) {
@@ -907,35 +928,17 @@ class UserController extends Controller
         }
         $medical_record->height = ($request->filled('estatura')) ? $request->estatura : $medical_record->height;
         $medical_record->consumption_record = ($request->filled('registro_consumo')) ? $request->registro_consumo : $medical_record->consumption_record;
-        if ($request->has('alergias') && $request->alergias != null) {
-            $medical_record->alergies = (count($request->alergias) > 0) ? json_encode($request->alergias) : $medical_record->alergies;
-        }
-        if ($request->has('condiciones_medicas') && $request->condiciones_medicas != null) {
-            $medical_record->health_conditions = (count($request->condiciones_medicas) > 0) ? json_encode($request->condiciones_medicas) : $medical_record->health_conditions;
-        }
+        $medical_record->alergies = (($request->filled('alergias')) && count($request->alergias) > 0) ? json_encode($request->alergias) : $medical_record->alergies;
+        $medical_record->health_conditions = (($request->filled('condiciones_medicas')) && count($request->condiciones_medicas) > 0) ? json_encode($request->condiciones_medicas) : $medical_record->health_conditions;
+        
 
-        $actividad_fisica = null;
-        if ($request->has('actividad_fisica_id')) {
-            $actividad_fisica = PhysicalActivity::find($request->actividad_fisica_id);
-            if ($actividad_fisica == null) {
-                return response()->json([
-                    'code' => 404,
-                    'msg' => 'Actividad fisica que estas tratando de asignar no existe.',
-                    'data' => null
-                ]);
-            }
+        if ($request->filled('actividad_fisica_id')) {
+            $subcategory = Subcategory::find($request->actividad_fisica_id);
+            $medical_record->physical_activity = $subcategory->id;
         }
-
-        $objetivo = null;
-        if ($request->has('objetivo_id')) {
-            $objetivo = Objective::find($request->objetivo_id);
-            if ($objetivo == null) {
-                return response()->json([
-                    'code' => 404,
-                    'msg' => 'Objetivo que estas tratando de asignar no existe.',
-                    'data' => null
-                ]);
-            }
+        if ($request->filled('objetivo_id')) {
+            $subcategory = Subcategory::find($request->objetivo_id);
+            $medical_record->objective_id = $subcategory->id;
         }
 
         $consultorio = null;
@@ -965,9 +968,7 @@ class UserController extends Controller
         $user->nutricionist_id = ($request->has('nutricionista_id') ? $nutricionista->id : null);
         $user->room_id = ($request->has('consultorio_id') ? $consultorio->id : null);
         $user->update();
-        $medical_record->objective_id = ($request->has('objetivo_id') ? $objetivo->id : $medical_record->objective_id);
-        $medical_record->physical_activity_id = ($request->has('actividad_fisica_id') ? $actividad_fisica->id : $medical_record->physical_activity_id);
-        $medical_record->civil_status = ($request->has('estado_civil') ? $request->estado_civil : $medical_record->civil_statu);
+        $medical_record->civil_status = ($request->filled('estado_civil') ? $request->estado_civil : $medical_record->civil_statu);
 
         if ($request->filled('consumo_alcohol')) {
             $subcategory = Subcategory::find($request->consumo_alcohol);

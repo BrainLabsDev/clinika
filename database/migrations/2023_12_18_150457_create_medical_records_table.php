@@ -24,10 +24,6 @@ class CreateMedicalRecordsTable extends Migration
             $table->float('height', 8, 2)->default(0.0);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('physical_activity_id')->nullable();
-            $table->foreign('physical_activity_id')->references('id')->on('physical_activities');
-            $table->unsignedBigInteger('objective_id')->nullable();
-            $table->foreign('objective_id')->references('id')->on('objectives');
             $table->timestamps();
         });
     }

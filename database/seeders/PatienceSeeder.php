@@ -28,6 +28,9 @@ class PatienceSeeder extends Seeder
             'birthday' => '1992-06-24',
             'rol' => 'Usuario',
             'nutricionist_id' => null,
+            'dni' => 'XXX-XXX',
+            'profesion' => 'worker',
+            'residence' => 'Mexico',
             'password' => Hash::make('admin01'),
             'room_id' => 1,
             'created_at' => now(),
@@ -46,6 +49,9 @@ class PatienceSeeder extends Seeder
             'nutricionist_id' => null,
             'password' => Hash::make('nutri01'),
             'room_id' => 1,
+            'dni' => 'XXX-XXX',
+            'profesion' => 'worker',
+            'residence' => 'Mexico',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -62,6 +68,9 @@ class PatienceSeeder extends Seeder
             'nutricionist_id' => null,
             'password' => Hash::make('nutri02'),
             'room_id' => 1,
+            'dni' => 'XXX-XXX',
+            'profesion' => 'worker',
+            'residence' => 'Mexico',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -78,6 +87,9 @@ class PatienceSeeder extends Seeder
             'nutricionist_id' => 2,
             'password' => Hash::make('user01'),
             'room_id' => 1,
+            'dni' => 'XXX-XXX',
+            'profesion' => 'worker',
+            'residence' => 'Mexico',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -94,6 +106,9 @@ class PatienceSeeder extends Seeder
             'nutricionist_id' => 3,
             'password' => Hash::make('user02'),
             'room_id' => 1,
+            'dni' => 'XXX-XXX',
+            'profesion' => 'worker',
+            'residence' => 'Mexico',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -110,6 +125,9 @@ class PatienceSeeder extends Seeder
             'nutricionist_id' => 2,
             'password' => Hash::make('user03'),
             'room_id' => 1,
+            'dni' => 'XXX-XXX',
+            'profesion' => 'worker',
+            'residence' => 'Mexico',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -130,8 +148,8 @@ class PatienceSeeder extends Seeder
         $medical_record = new MedicalRecord();
         $medical_record->alergies = json_encode(['Lactosa', 'Gluten', 'Cacahuate']);
         $medical_record->health_conditions = json_encode(['Diabetes', 'Hipertension']);
-        $medical_record->physical_activity_id = 3;
-        $medical_record->objective_id = 4;
+        $medical_record->physical_activity = 28;
+        $medical_record->objective = 29;
         $medical_record->user_id = $user->id;
         $medical_record->save();
 
@@ -153,8 +171,8 @@ class PatienceSeeder extends Seeder
         $medical_record = new MedicalRecord();
         $medical_record->alergies = json_encode(['Lactosa', 'Gluten']);
         $medical_record->health_conditions = json_encode(['Diabetes']);
-        $medical_record->physical_activity_id = 1;
-        $medical_record->objective_id = 2;
+        $medical_record->physical_activity = 28;
+        $medical_record->objective = 29;
         $medical_record->user_id = $user->id;
         $medical_record->save();
 

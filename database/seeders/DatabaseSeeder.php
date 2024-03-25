@@ -14,12 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call(PhysicalActivitySeeder::class);
-        $this->call(ObjectivesSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(SubcategorySeeder::class);
         $this->call(RolSeeder::class);
         $this->call(RoomSeeder::class);
         $this->call(PatienceSeeder::class);
-        $this->call(CategorySeeder::class);
-        $this->call(SubcategorySeeder::class);
     }
 }

@@ -173,5 +173,75 @@ class SubcategorySeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('subcategory')->insert([
+            'description' => 'Ninguna',
+            'category_id' => 6,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => '1-2 días',
+            'category_id' => 6,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => '3-4 días',
+            'category_id' => 6,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => '5-6 días',
+            'category_id' => 6,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => 'Diario',
+            'category_id' => 6,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => 'Bajar de peso',
+            'category_id' => 7,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => 'Aumentar masa muscular',
+            'category_id' => 7,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => 'Mantener peso actual',
+            'category_id' => 7,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => 'Mejorar salud general',
+            'category_id' => 7,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('subcategory')->insert([
+            'description' => 'Reducir riesgo de enfermedades',
+            'category_id' => 7,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
