@@ -76,7 +76,6 @@ class UserController extends Controller
                 'alergias' => ($medical_record == null) ? null :$medical_record->alergias,
                 'historial' => ($medical_record == null) ? null : $medical_record->background,
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
-                'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
                 'num_identificacion' => Auth::user()->dni,
                 'profesion' => Auth::user()->profesion,
@@ -172,7 +171,6 @@ class UserController extends Controller
                 'alergias' => ($medical_record == null) ? null :$medical_record->alergias,
                 'historial' => ($medical_record == null) ? null : $medical_record->background,
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
-                'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
                 'estado_civil' => ($medical_record == null) ? null : $medical_record->civil_status,
                 'num_identificacion' => $user->dni,
@@ -297,7 +295,6 @@ class UserController extends Controller
                 'alergias' => ($medical_record == null) ? null : $medical_record->alergies,
                 'historial' => ($medical_record == null) ? null : $medical_record->background,
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
-                'horas_dormidas' => ($medical_record == null) ? null : $medical_record->sleep_hours,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
                 'estado_civil' => ($medical_record == null) ? null : $medical_record->civil_status,
                 'num_identificacion' => $cliente->dni,
@@ -672,7 +669,7 @@ class UserController extends Controller
                 ]);
             }
         }
-        $medical_record->sleep_hours = ($request->filled('horas_dormidas')) ? $request->horas_dormidas : null;
+        
         $medical_record->background = ($request->filled('historial')) ? $request->historial : null;
         $medical_record->consumption_record = ($request->filled('registro_consumo')) ? $request->registro_consumo : null;
         $medical_record->height = ($request->filled('estatura')) ? $request->estatura : 0.0;

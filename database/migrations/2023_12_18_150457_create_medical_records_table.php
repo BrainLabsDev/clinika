@@ -19,7 +19,6 @@ class CreateMedicalRecordsTable extends Migration
             $table->json('medicines')->nullable();
             $table->json('health_conditions')->nullable();
             $table->json('disorders')->nullable();
-            $table->string('sleep_hours')->nullable();
             $table->longText('background')->nullable();
             $table->longText('consumption_record')->nullable();
             $table->float('height', 8, 2)->default(0.0);
