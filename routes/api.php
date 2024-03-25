@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Appoinment\AppoinmentController;
 use App\Http\Controllers\API\Product\ProductController;
 use App\Http\Controllers\API\Category\CategoryController;
+use App\Http\Controllers\API\Medical\MedicalConditionsController;
 use App\Http\Controllers\API\Room\RoomController;
 use App\Http\Controllers\API\Suscription\SuscriptionController;
 use App\Http\Controllers\API\Subcategory\SubcategoryController;
@@ -114,4 +115,7 @@ Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/paypal/catalogo', [PaypalController::class, 'store']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('/paypal/catalogo/{id}', [PaypalController::class, 'show']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delete('/delete-paypal/catalogo/{id}', [PaypalController::class, 'delete']);
+
+
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario'])->get('/show-categories', [MedicalConditionsController::class, 'index']);
 
