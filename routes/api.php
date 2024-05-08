@@ -36,7 +36,7 @@ Route::post('/create/user/',[UserController::class, 'store']);
 
 Route::get('/paypal/catalogo', [PaypalController::class, 'index']);
 
-
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario'])->get('/show-categories', [MedicalConditionsController::class, 'index']);
 Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista'])->get('/show/users', [UserController::class, 'showAll']);
 Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista'])->get('/show/clientes', [UserController::class, 'showClientes']);
 Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista|Usuario'])->post('/update/user/{user}', [UserController::class, 'update']);
@@ -115,7 +115,4 @@ Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/paypal/catalogo', [PaypalController::class, 'store']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('/paypal/catalogo/{id}', [PaypalController::class, 'show']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delete('/delete-paypal/catalogo/{id}', [PaypalController::class, 'delete']);
-
-
-Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario'])->get('/show-categories', [MedicalConditionsController::class, 'index']);
 
