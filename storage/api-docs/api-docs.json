@@ -640,7 +640,7 @@
                 ]
             }
         },
-        "/api/show-categories/{citaControl}": {
+        "/api/show-categories": {
             "get": {
                 "tags": [
                     "medical-conditions"

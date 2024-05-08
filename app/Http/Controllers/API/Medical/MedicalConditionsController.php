@@ -11,7 +11,7 @@ class MedicalConditionsController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/show-categories/{citaControl}",
+     *     path="/api/show-categories",
      *     summary="Obtener nuevas condiciones medicas",
      *     operationId="showMedicalConditions",
      *     tags={"medical-conditions"},
