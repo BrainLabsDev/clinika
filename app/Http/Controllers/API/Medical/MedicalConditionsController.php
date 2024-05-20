@@ -37,9 +37,20 @@ class MedicalConditionsController extends Controller
             $categorias = array_merge($data,(array) $categorias);
 
             foreach ($category->subcategorias as $subcategory) {
-                $categorias[$category->name][$subcategory->id] = $subcategory->description;
+                $categorias[$category->name][] = [
+                    'id' => $subcategory->id,
+                    'label' => $subcategory->description
+                ];
             }  
         }
+
+        $categorias['estado_civil'][] = [
+            ['label' => 'Soltero/a'],
+            ['label' => 'Casado/a'],
+            ['label' => 'Viudo/a'],
+            ['label' => 'Divorciado/a'],
+            ['label' => 'Unión Libre'],
+        ];
 
         return response()->json([
             'code' => 200,
