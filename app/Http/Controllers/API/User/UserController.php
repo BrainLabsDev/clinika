@@ -331,9 +331,9 @@ class UserController extends Controller
                 'profesion' => $cliente->profesion,
                 'lugar_residencia' => $cliente->residence,
                 'suscripcion' => [
-                    'id' => $cliente->suscripcion->id,
-                    'empieza' => $cliente->suscripcion->start_date,
-                    'termina' => $cliente->suscripcion->end_date,
+                    'id' => ($cliente->suscripcion == null) ? null : $cliente->suscripcion->id,
+                    'empieza' => ($cliente->suscripcion == null) ? null : $cliente->suscripcion->start_date,
+                    'termina' => ($cliente->suscripcion == null) ? null : $cliente->suscripcion->end_date,
                 ],
                 'nutricionista' => ($nutricionista != null) ? ['id' => $nutricionista->id, 'nombre' => $nutricionista->name] : 'Sin asignar',
                 'consultorio' => [
