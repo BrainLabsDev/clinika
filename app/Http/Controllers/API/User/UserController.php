@@ -690,7 +690,7 @@ class UserController extends Controller
         }
         if ($request->filled('objetivo_id')) {
             $subcategory = Subcategory::find($request->objetivo_id);
-            $medical_record->objective_id = $subcategory->id;
+            $medical_record->objective = $subcategory->id;
         }
 
         $medical_record->background = ($request->filled('historial')) ? $request->historial : null;
@@ -938,7 +938,7 @@ class UserController extends Controller
         }
         if ($request->filled('objetivo_id')) {
             $subcategory = Subcategory::find($request->objetivo_id);
-            $medical_record->objective_id = $subcategory->id;
+            $medical_record->objective = $subcategory->id;
         }
 
         $consultorio = null;
