@@ -630,7 +630,10 @@ class UserController extends Controller
         // Or its being registered for the nutricionist
         $consultorio = null;
         $consultorio_id = null;
-        if ($request->has('consultorio_id')) {
+        if ($request->filled('metodo_pago')) {
+            $consultorio = Room::first();
+            $consultorio_id = $consultorio->id; 
+        } else if ($request->has('consultorio_id')) {
             $consultorio = Room::find($request->consultorio_id);
             if ($consultorio == null) {
                 return response()->json([
@@ -639,9 +642,6 @@ class UserController extends Controller
                     'data' => null
                 ]);
             }
-            $consultorio_id = $consultorio->id;
-        } else if ($request->filled('metodo_pago')) {
-            $consultorio = Room::first();
             $consultorio_id = $consultorio->id;
         }
         // same process for the nutricionist, we need to know if its comming from paypal
@@ -681,7 +681,7 @@ class UserController extends Controller
         $medical_record->health_conditions = (($request->filled('condiciones_medicas')) && count($request->condiciones_medicas) > 0) ? json_encode($request->condiciones_medicas) : null;
         $medical_record->health_conditions = ($request->filled('medicinas') && count($request->medicinas) > 0) ? json_encode($request->medicinas) : null;
         $medical_record->health_conditions = ($request->filled('desordenes') && count($request->desordenes) > 0) ? json_encode($request->desordenes) : null;
-        $medical_record->civil_status = ($request->filled('estado_civil')) ? $request->estado_civil : null;
+        $medical_record->civil_status = ($request->filled('estado_civil')) ? $request->estado_civil : 'Soltero/a';
         
 
         if ($request->filled('actividad_fisica_id')) {
