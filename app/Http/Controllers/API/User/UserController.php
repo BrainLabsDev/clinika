@@ -216,7 +216,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->objective != null) {
                 $subcategory = Subcategory::find($medical_record->objective);
-                $user['objetivo'] = [
+                $usuario['objetivo'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
@@ -224,7 +224,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->physical_activity != null) {
                 $subcategory = Subcategory::find($medical_record->physical_activity);
-                $user['actividad_fisica'] = [
+                $usuario['actividad_fisica'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
@@ -232,7 +232,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->alcohol_consumption != null) {
                 $subcategory = Subcategory::find($medical_record->alcohol_consumption);
-                $user['consumo_alcohol'] = [
+                $usuario['consumo_alcohol'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
@@ -240,7 +240,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->smoke != null) {
                 $subcategory = Subcategory::find($medical_record->smoke);
-                $user['fumador'] = [
+                $usuario['fumador'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
@@ -248,7 +248,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->water_consumption != null) {
                 $subcategory = Subcategory::find($medical_record->water_consumption);
-                $user['consumo_de_agua_diario'] = [
+                $usuario['consumo_de_agua_diario'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
@@ -256,7 +256,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->stress != null) {
                 $subcategory = Subcategory::find($medical_record->stress);
-                $user['estres_general'] = [
+                $usuario['estres_general'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
@@ -264,7 +264,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->hours_of_sleep != null) {
                 $subcategory = Subcategory::find($medical_record->hours_of_sleep);
-                $user['horas_de_sueño'] = [
+                $usuario['horas_de_sueño'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
