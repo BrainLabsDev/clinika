@@ -73,7 +73,7 @@ class UserController extends Controller
                 'registro_consumo' => ($medical_record == null) ? null : $medical_record->consumption_record,
                 'fecha_nacimiento' => Auth::user()->birthday,
                 'condiciones_medicas' => ($medical_record == null) ? null :$medical_record->health_conditions,
-                'alergias' => ($medical_record == null) ? null :$medical_record->alergias,
+                'alergias' => ($medical_record == null) ? null :$medical_record->alergies,
                 'historial' => ($medical_record == null) ? null : $medical_record->background,
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
@@ -180,10 +180,9 @@ class UserController extends Controller
                 'email' => $user->email,
                 'telefono' => $user->phone,
                 'registro_consumo' => ($medical_record != null) ? $medical_record->consumption_record : null,
-                'registro_consumo' => ($medical_record == null) ? null : $medical_record->consumption_record,
                 'fecha_nacimiento' => $user->birthday,
                 'condiciones_medicas' => ($medical_record == null) ? null :$medical_record->health_conditions,
-                'alergias' => ($medical_record == null) ? null :$medical_record->alergias,
+                'alergias' => ($medical_record == null) ? null :$medical_record->alergies,
                 'historial' => ($medical_record == null) ? null : $medical_record->background,
                 'desordenes' => ($medical_record == null) ? null : $medical_record->disorders,
                 'medicinas' => ($medical_record == null) ? null : $medical_record->medicines,
@@ -676,13 +675,11 @@ class UserController extends Controller
         // If thre register is full we will recieve more information in the register
         // This extra information goes on a medical record
         $medical_record = new MedicalRecord();
-
         $medical_record->alergies = (($request->filled('alergias')) && count($request->alergias) > 0) ? json_encode($request->alergias) : null;
         $medical_record->health_conditions = (($request->filled('condiciones_medicas')) && count($request->condiciones_medicas) > 0) ? json_encode($request->condiciones_medicas) : null;
-        $medical_record->health_conditions = ($request->filled('medicinas') && count($request->medicinas) > 0) ? json_encode($request->medicinas) : null;
-        $medical_record->health_conditions = ($request->filled('desordenes') && count($request->desordenes) > 0) ? json_encode($request->desordenes) : null;
+        $medical_record->medicines = ($request->filled('medicinas') && count($request->medicinas) > 0) ? json_encode($request->medicinas) : null;
+        $medical_record->disorders = ($request->filled('desordenes') && count($request->desordenes) > 0) ? json_encode($request->desordenes) : null;
         $medical_record->civil_status = ($request->filled('estado_civil')) ? $request->estado_civil : 'Soltero/a';
-        
 
         if ($request->filled('actividad_fisica_id')) {
             $subcategory = Subcategory::find($request->actividad_fisica_id);
@@ -926,11 +923,13 @@ class UserController extends Controller
         if ($medical_record == null) {
             $medical_record = new MedicalRecord();
         }
+        $medical_record->alergies = (($request->filled('alergias')) && count($request->alergias) > 0) ? json_encode($request->alergias) : null;
+        $medical_record->health_conditions = (($request->filled('condiciones_medicas')) && count($request->condiciones_medicas) > 0) ? json_encode($request->condiciones_medicas) : null;
+        $medical_record->medicines = ($request->filled('medicinas') && count($request->medicinas) > 0) ? json_encode($request->medicinas) : null;
+        $medical_record->disorders = ($request->filled('desordenes') && count($request->desordenes) > 0) ? json_encode($request->desordenes) : null;
+        $medical_record->civil_status = ($request->filled('estado_civil')) ? $request->estado_civil : 'Soltero/a';
         $medical_record->height = ($request->filled('estatura')) ? $request->estatura : $medical_record->height;
         $medical_record->consumption_record = ($request->filled('registro_consumo')) ? $request->registro_consumo : $medical_record->consumption_record;
-        $medical_record->alergies = (($request->filled('alergias')) && count($request->alergias) > 0) ? json_encode($request->alergias) : $medical_record->alergies;
-        $medical_record->health_conditions = (($request->filled('condiciones_medicas')) && count($request->condiciones_medicas) > 0) ? json_encode($request->condiciones_medicas) : $medical_record->health_conditions;
-        
 
         if ($request->filled('actividad_fisica_id')) {
             $subcategory = Subcategory::find($request->actividad_fisica_id);
