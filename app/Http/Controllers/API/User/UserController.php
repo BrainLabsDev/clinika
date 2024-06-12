@@ -146,7 +146,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->hours_of_sleep != null) {
                 $subcategory = Subcategory::find($medical_record->hours_of_sleep);
-                $user['horas_de_sueño'] = [
+                $user['horas_de_sueno'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
@@ -264,7 +264,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->hours_of_sleep != null) {
                 $subcategory = Subcategory::find($medical_record->hours_of_sleep);
-                $usuario['horas_de_sueño'] = [
+                $usuario['horas_de_sueno'] = [
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
@@ -394,7 +394,7 @@ class UserController extends Controller
 
             if ($medical_record != null && $medical_record->hours_of_sleep != null) {
                 $subcategory = Subcategory::find($medical_record->hours_of_sleep);
-                $user['horas_de_sueño'] =[
+                $user['horas_de_sueno'] =[
                     'descripcion' => $subcategory->description,
                     'id' => $subcategory->id
                 ];
