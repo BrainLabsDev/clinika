@@ -695,28 +695,28 @@ class UserController extends Controller
         $medical_record->height = ($request->filled('estatura')) ? $request->estatura : 0.0;
         $medical_record->user_id = $user->id;
 
-        if ($request->filled('consumo_alcohol')) {
-            $subcategory = Subcategory::find($request->consumo_alcohol);
+        if ($request->filled('consumo_alcohol_id')) {
+            $subcategory = Subcategory::find($request->consumo_alcohol_id);
             $medical_record->alcohol_consumption = $subcategory->id;
         }
 
-        if ($request->filled('fumador')) {
-            $subcategory = Subcategory::find($request->fumador);
+        if ($request->filled('tipo_fumador_id')) {
+            $subcategory = Subcategory::find($request->tipo_fumador_id);
             $medical_record->smoke = $subcategory->id;
         }
 
-        if ($request->filled('consumo_agua')) {
-            $subcategory = Subcategory::find($request->consumo_agua);
+        if ($request->filled('consumo_agua_id')) {
+            $subcategory = Subcategory::find($request->consumo_agua_id);
             $medical_record->water_consumption = $subcategory->id;
         }
 
-        if ($request->filled('estres')) {
-            $subcategory = Subcategory::find($request->estres);
+        if ($request->filled('nivel_estres_id')) {
+            $subcategory = Subcategory::find($request->nivel_estres_id);
             $medical_record->stress = $subcategory->id;
         }
 
-        if ($request->filled('horas_de_sueño')) {
-            $subcategory = Subcategory::find($request->horas_de_sueño);
+        if ($request->filled('horas_dormidas')) {
+            $subcategory = Subcategory::find($request->horas_dormidas);
             $medical_record->hours_of_sleep = $subcategory->id;
         }
 
@@ -969,28 +969,28 @@ class UserController extends Controller
         $user->update();
         $medical_record->civil_status = ($request->filled('estado_civil') ? $request->estado_civil : $medical_record->civil_statu);
 
-        if ($request->filled('consumo_alcohol')) {
-            $subcategory = Subcategory::find($request->consumo_alcohol);
+        if ($request->filled('consumo_alcohol_id')) {
+            $subcategory = Subcategory::find($request->consumo_alcohol_id);
             $medical_record->alcohol_consumption = $subcategory->id;
         }
 
-        if ($request->filled('fumador')) {
-            $subcategory = Subcategory::find($request->fumador);
+        if ($request->filled('tipo_fumador_id')) {
+            $subcategory = Subcategory::find($request->tipo_fumador_id);
             $medical_record->smoke = $subcategory->id;
         }
 
-        if ($request->filled('consumo_agua')) {
-            $subcategory = Subcategory::find($request->consumo_agua);
+        if ($request->filled('consumo_agua_id')) {
+            $subcategory = Subcategory::find($request->consumo_agua_id);
             $medical_record->water_consumption = $subcategory->id;
         }
 
-        if ($request->filled('estres')) {
-            $subcategory = Subcategory::find($request->estres);
+        if ($request->filled('nivel_estres_id')) {
+            $subcategory = Subcategory::find($request->nivel_estres_id);
             $medical_record->stress = $subcategory->id;
         }
 
-        if ($request->filled('horas_de_sueño')) {
-            $subcategory = Subcategory::find($request->horas_de_sueño);
+        if ($request->filled('horas_dormidas')) {
+            $subcategory = Subcategory::find($request->horas_dormidas);
             $medical_record->hours_of_sleep = $subcategory->id;
         }
 
