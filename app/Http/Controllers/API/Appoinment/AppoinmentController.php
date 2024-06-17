@@ -215,6 +215,15 @@ class AppoinmentController extends Controller
             ]);
         }
 
+        $consultorio = Room::find($request->consultorio_id);
+        if ($consultorio == null) {
+            return response()->json([
+                'code' => 404,
+                'msg' => 'El Consultorio no existe',
+                'data' => null,
+            ]);
+        }
+
         if($cliente->suscripcion == null) {
             //En caso de no tener un suscripcion activa
             //Se procede a crear una suscripcion
@@ -256,6 +265,7 @@ class AppoinmentController extends Controller
         $cita->status = ($request->filled('estado_consulta')) ? $request->estado_consulta : 'No Confirmado';
         $cita->client_id = $cliente->id;
         $cita->nutricionist_id = $nutricionista->id;
+        $cita->consultive_room_id = $consultorio->id;
         $cita->save();
 
         return response()->json([
@@ -386,6 +396,15 @@ class AppoinmentController extends Controller
             ]);
         }
 
+        $consultorio = Room::find($cliente->consultorio_id);
+        if ($consultorio == null) {
+            return response()->json([
+                'code' => 404,
+                'msg' => 'El consultorio no existe',
+                'data' => null,
+            ]);
+        }
+
         if($cliente->suscripcion == null) {
             //En caso de no tener un suscripcion activa
             //Se procede a crear una suscripcion
@@ -421,6 +440,7 @@ class AppoinmentController extends Controller
         $cita->status = ($request->filled('estado_consulta')) ? $request->estado_consulta : 'No Confirmado';
         $cita->client_id = $cliente->id;
         $cita->nutricionist_id = $nutricionista->id;
+        $cita->consultive_room_id = $consultorio->id;
         $cita->save();
 
         return response()->json([
