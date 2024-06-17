@@ -167,31 +167,22 @@ class AppoinmentController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'peso' => 'required|string',
-            'musculo' => 'required|string',
-            'grasas' => 'required|string',
-            'porcentaje_grasa' => 'required|string',
-            'cc' => 'required|string',
-            'grasa_viceral' => 'required|string',
-            'evolucion' => 'required|string',
+            'peso' => 'required',
+            'musculo' => 'required',
+            'grasas' => 'required',
+            'porcentaje_grasa' => 'required',
+            'cc' => 'required',
+            'grasa_viceral' => 'required',
             'cliente_id' => 'required|string',
         ];
 
         $messages = [
             'peso.required' => 'El peso es requerido',
-            'peso.string' => 'El peso debe ser un número',
             'musculo.required' => 'El porcentaje de musculo es requerido',
-            'musculo.string' => 'El porcentaje de musculo debe ser un número',
             'grasas.required' => 'El porcentaje de grasas es requerido',
-            'grasas.string' => 'El porcentaje de grasas debe ser un número',
             'porcentaje_grasa.required' => 'El porcentaje de grasa es requerido',
-            'porcentaje_grasa.string' => 'El porcentaje de grasa debe ser un número',
             'cc.required' => 'El CC es requerido',
-            'cc.string' => 'El CC debe ser un número',
             'grasa_viceral.required' => 'El porcentaje de grasa visceral es requerido',
-            'grasa_viceral.string' => 'El porcentaje de grasa visceral debe ser un número',
-            'evolucion.required' => 'La evolución es requerida',
-            'evolucion.string' => 'La evolución debe ser un texto',
             'cliente_id.required' => 'El cliente es requerido',
             'cliente_id.string' => 'El cliente debe ser un número',
         ];
@@ -215,7 +206,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $nutricionista = User::find($cliente->nutricionist_id);
+        $nutricionista = User::find($request->nutricionist_id);
         if ($nutricionista == null) {
             return response()->json([
                 'code' => 404,
@@ -248,14 +239,21 @@ class AppoinmentController extends Controller
 
 
         $cita = new Appoinment();
-        $cita->date = now();
+        $cita->date = ($request->filled('fecha_consulta')) ? $request->fecha_consulta : now();
         $cita->weight = (double) $request->peso;
         $cita->muscle = (double) $request->musculo;
         $cita->fat = (double) $request->grasas;
         $cita->average_fat = (double) $request->porcentaje_grasa;
         $cita->cc = (double) $request->cc;
         $cita->viseral_fat = (double) $request->grasa_viceral;
-        $cita->evolution = $request->evolucion;
+        $cita->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : null;
+        $cita->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : null;
+        $cita->additional_notes = ($request->filled('notas_adicionales')) ? $request->notas_adicionales : null;
+        $cita->video_call_url = ($request->filled('videoconferencia')) ? $request->videoconferencia : null;
+        $cita->start_time = ($request->filled('hora_inicio')) ? $request->hora_inicio : null;
+        $cita->end_time = ($request->filled('hora_termino')) ? $request->hora_termino : null;
+        $cita->google_calendar = ($request->filled('google_calendar')) ? $request->google_calendar : null;
+        $cita->status = ($request->filled('estado_consulta')) ? $request->estado_consulta : 'No Confirmado';
         $cita->client_id = $cliente->id;
         $cita->nutricionist_id = $nutricionista->id;
         $cita->save();
@@ -406,14 +404,21 @@ class AppoinmentController extends Controller
         }
 
 
-        //$cita->fecha_cita = now();
+        $cita->date = ($request->filled('fecha_consulta')) ? $request->fecha_consulta : now();
         $cita->weight = (double) $request->peso;
         $cita->muscle = (double) $request->musculo;
         $cita->fat = (double) $request->grasas;
         $cita->average_fat = (double) $request->porcentaje_grasa;
         $cita->cc = (double) $request->cc;
         $cita->viseral_fat = (double) $request->grasa_viceral;
-        $cita->evolution = $request->evolucion;
+        $cita->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : null;
+        $cita->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : null;
+        $cita->additional_notes = ($request->filled('notas_adicionales')) ? $request->notas_adicionales : null;
+        $cita->video_call_url = ($request->filled('videoconferencia')) ? $request->videoconferencia : null;
+        $cita->start_time = ($request->filled('hora_inicio')) ? $request->hora_inicio : null;
+        $cita->end_time = ($request->filled('hora_termino')) ? $request->hora_termino : null;
+        $cita->google_calendar = ($request->filled('google_calendar')) ? $request->google_calendar : null;
+        $cita->status = ($request->filled('estado_consulta')) ? $request->estado_consulta : 'No Confirmado';
         $cita->client_id = $cliente->id;
         $cita->nutricionist_id = $nutricionista->id;
         $cita->save();
