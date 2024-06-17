@@ -206,7 +206,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $nutricionista = User::find($request->nutricionist_id);
+        $nutricionista = User::find($request->nutricionista_id);
         if ($nutricionista == null) {
             return response()->json([
                 'code' => 404,
@@ -347,33 +347,24 @@ class AppoinmentController extends Controller
     public function update(Request $request, Appoinment $cita)
     {
         $rules = [
-            'peso' => 'required|string',
-            'musculo' => 'required|string',
-            'grasas' => 'required|string',
-            'porcentaje_grasa' => 'required|string',
-            'cc' => 'required|string',
-            'grasa_viceral' => 'required|string',
-            'evolucion' => 'required|string',
-            'cliente_id' => 'required|string',
+            'peso' => 'required',
+            'musculo' => 'required',
+            'grasas' => 'required',
+            'porcentaje_grasa' => 'required',
+            'cc' => 'required',
+            'grasa_viceral' => 'required',
+            'cliente_id' => 'required',
         ];
 
         $messages = [
             'peso.required' => 'El peso es requerido',
-            'peso.string' => 'El peso debe ser un número',
             'musculo.required' => 'El porcentaje de musculo es requerido',
-            'musculo.string' => 'El porcentaje de musculo debe ser un número',
             'grasas.required' => 'El porcentaje de grasas es requerido',
-            'grasas.string' => 'El porcentaje de grasas debe ser un número',
             'porcentaje_grasa.required' => 'El porcentaje de grasa es requerido',
-            'porcentaje_grasa.string' => 'El porcentaje de grasa debe ser un número',
             'cc.required' => 'El CC es requerido',
-            'cc.string' => 'El CC debe ser un número',
             'grasa_viceral.required' => 'El porcentaje de grasa visceral es requerido',
-            'grasa_viceral.string' => 'El porcentaje de grasa visceral debe ser un número',
             'evolucion.required' => 'La evolución es requerida',
-            'evolucion.string' => 'La evolución debe ser un texto',
             'cliente_id.required' => 'El cliente es requerido',
-            'cliente_id.string' => 'El cliente debe ser un número'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -387,7 +378,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $nutricionista = User::find($cliente->nutricionist_id);
+        $nutricionista = User::find($request->nutricionista_id);
         if ($nutricionista == null) {
             return response()->json([
                 'code' => 404,
@@ -396,7 +387,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $consultorio = Room::find($cliente->consultorio_id);
+        $consultorio = Room::find($request->consultorio_id);
         if ($consultorio == null) {
             return response()->json([
                 'code' => 404,

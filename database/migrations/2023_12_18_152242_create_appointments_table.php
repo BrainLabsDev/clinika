@@ -25,11 +25,11 @@ class CreateAppointmentsTable extends Migration
             $table->longText('video_call_url')->nullable();
             $table->string('start_time', 5)->nullable();
             $table->string('end_time', 5)->nullable();
-            $table->longText('calendar_google')->nullable();
+            $table->longText('google_calendar')->nullable();
             $table->enum('status',['No Confirmada', 'Confirmada', 'Cancelada'])->default('No Confirmada');
-            $table->longText('notes_client');
-            $table->longText('notes_intern');
-            $table->longText('additional_notes');
+            $table->longText('notes_client')->nullable();
+            $table->longText('notes_intern')->nullable();
+            $table->longText('additional_notes')->nullable();
             //FK - CLIENTE
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('users');
