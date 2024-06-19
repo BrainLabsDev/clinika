@@ -5,18 +5,18 @@
         "version": "1.0"
     },
     "paths": {
-        "/api/show-history/cita-control/{user}": {
+        "/api/show-history/cita/{patience_id}": {
             "get": {
                 "tags": [
-                    "cita-control"
+                    "cita"
                 ],
-                "summary": "Mostrando historial de cita de control del cliente",
-                "operationId": "showHistorialCitaControlUser",
+                "summary": "Mostrando historial de citas del paciente",
+                "operationId": "showAllCitaPatience",
                 "parameters": [
                     {
-                        "name": "user",
+                        "name": "patience_id",
                         "in": "path",
-                        "description": "Id of User",
+                        "description": "Id of patience",
                         "schema": {
                             "type": "integer"
                         }
@@ -24,13 +24,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Showing history of citas of control of the Client"
+                        "description": "Showing all apointments of the Patience"
                     },
                     "401": {
                         "description": "User not authenticated"
                     },
                     "404": {
-                        "description": "User not found"
+                        "description": "Patience not found"
                     },
                     "500": {
                         "description": "Unexpected error"
@@ -43,18 +43,26 @@
                 ]
             }
         },
-        "/api/show/cita-control/{user}": {
+        "/api/show/cita/{patience_id}/{appointment_id}": {
             "get": {
                 "tags": [
-                    "cita-control"
+                    "cita"
                 ],
-                "summary": "Mostrando cita de control del cliente",
-                "operationId": "showCitaControlUser",
+                "summary": "Mostrando cita del cliente",
+                "operationId": "showCitaPatience",
                 "parameters": [
                     {
-                        "name": "user",
+                        "name": "patience_id",
                         "in": "path",
-                        "description": "Id of User",
+                        "description": "Id of the Patience",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "appointment_id",
+                        "in": "path",
+                        "description": "Id of the Appointment",
                         "schema": {
                             "type": "integer"
                         }
@@ -81,40 +89,35 @@
                 ]
             }
         },
-        "/api/create/cita-control": {
+        "/api/create/cita": {
             "post": {
                 "tags": [
-                    "cita-control"
+                    "cita"
                 ],
-                "summary": "Crear cita de control",
-                "operationId": "createCitaControl",
+                "summary": "Crear cita",
+                "operationId": "createCita",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
                             "schema": {
                                 "properties": {
-                                    "peso": {
-                                        "type": "integer"
+                                    "fecha_consulta": {
+                                        "type": "string",
+                                        "format": "date"
                                     },
-                                    "musculo": {
-                                        "type": "integer"
-                                    },
-                                    "grasas": {
-                                        "type": "integer"
-                                    },
-                                    "porcentaje_grasa": {
-                                        "type": "integer"
-                                    },
-                                    "cc": {
-                                        "type": "integer"
-                                    },
-                                    "grasa_viceral": {
-                                        "type": "integer"
-                                    },
-                                    "evolucion": {
+                                    "hora_start": {
                                         "type": "string"
                                     },
-                                    "cliente_id": {
+                                    "hora_end": {
+                                        "type": "string"
+                                    },
+                                    "paciente_id": {
+                                        "type": "integer"
+                                    },
+                                    "clinica_id": {
+                                        "type": "integer"
+                                    },
+                                    "nutriologo_id": {
                                         "type": "integer"
                                     }
                                 },
@@ -125,7 +128,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Cita de control created"
+                        "description": "Cita created"
                     },
                     "422": {
                         "description": "Validation rules failed"
@@ -136,18 +139,18 @@
                 }
             }
         },
-        "/api/update/cita-control/{cita}": {
+        "/api/update/cita/{cita}": {
             "post": {
                 "tags": [
-                    "cita-control"
+                    "cita"
                 ],
-                "summary": "Actualizar cita de control",
-                "operationId": "updateCitaControl",
+                "summary": "Actualizar cita",
+                "operationId": "updateCita",
                 "parameters": [
                     {
                         "name": "cita",
                         "in": "path",
-                        "description": "Id of the Cita de Control",
+                        "description": "Id of the Cita",
                         "schema": {
                             "type": "integer"
                         }
@@ -158,28 +161,23 @@
                         "multipart/form-data": {
                             "schema": {
                                 "properties": {
-                                    "peso": {
-                                        "type": "integer"
+                                    "fecha_consulta": {
+                                        "type": "string",
+                                        "format": "date"
                                     },
-                                    "musculo": {
-                                        "type": "integer"
-                                    },
-                                    "grasas": {
-                                        "type": "integer"
-                                    },
-                                    "porcentaje_grasa": {
-                                        "type": "integer"
-                                    },
-                                    "cc": {
-                                        "type": "integer"
-                                    },
-                                    "grasa_viceral": {
-                                        "type": "integer"
-                                    },
-                                    "evolucion": {
+                                    "hora_start": {
                                         "type": "string"
                                     },
-                                    "cliente_id": {
+                                    "hora_end": {
+                                        "type": "string"
+                                    },
+                                    "paciente_id": {
+                                        "type": "integer"
+                                    },
+                                    "clinica_id": {
+                                        "type": "integer"
+                                    },
+                                    "nutriologo_id": {
                                         "type": "integer"
                                     }
                                 },
@@ -201,18 +199,18 @@
                 }
             }
         },
-        "/api/eliminar/cita-control/{cita}": {
+        "/api/eliminar/cita/{cita}": {
             "delete": {
                 "tags": [
-                    "cita-control"
+                    "cita"
                 ],
-                "summary": "Delete cita de control",
-                "operationId": "deleteCitaControl",
+                "summary": "Delete cita",
+                "operationId": "deleteCita",
                 "parameters": [
                     {
                         "name": "cita",
                         "in": "path",
-                        "description": "Id of the cita control",
+                        "description": "Id of the cita",
                         "schema": {
                             "type": "integer"
                         }
@@ -220,10 +218,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Cita control deleted succesfully"
+                        "description": "Cita deleted succesfully"
                     },
                     "404": {
-                        "description": "Cita control not found"
+                        "description": "Cita not found"
                     },
                     "500": {
                         "description": "Unexpected error"

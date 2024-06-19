@@ -16,20 +16,12 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->double('weight');
-            $table->double('muscle');
-            $table->double('fat');
-            $table->double('average_fat');
-            $table->double('cc');
-            $table->double('viseral_fat');
             $table->longText('video_call_url')->nullable();
             $table->string('start_time', 5)->nullable();
             $table->string('end_time', 5)->nullable();
             $table->longText('google_calendar')->nullable();
             $table->enum('status',['No Confirmada', 'Confirmada', 'Cancelada'])->default('No Confirmada');
-            $table->longText('notes_client')->nullable();
-            $table->longText('notes_intern')->nullable();
-            $table->longText('additional_notes')->nullable();
+            $table->longText('notes')->nullable();
             //FK - CLIENTE
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('users');

@@ -59,11 +59,11 @@ Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delet
 Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin'])->get('/set/nutricionista/{user}', [RolController::class, 'setNutricionista']);
 Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista'])->get('/show/roles', [RolController::class, 'show']);
 
-Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario', EnsureSuscriptionIsValid::class])->get('/show/cita-control/{user}', [AppoinmentController::class, 'show']);
-Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario', EnsureSuscriptionIsValid::class])->get('/show-history/cita-control/{user}', [AppoinmentController::class, 'index']);
-Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/create/cita-control', [AppoinmentController::class, 'store']);
-Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/update/cita-control/{cita}', [AppoinmentController::class, 'update']);
-Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delete('/eliminar/cita-control/{cita}', [AppoinmentController::class, 'deleteCita']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario', EnsureSuscriptionIsValid::class])->get('/show/cita/{user}/{id}', [AppoinmentController::class, 'show']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario', EnsureSuscriptionIsValid::class])->get('/show-history/citas/{user}', [AppoinmentController::class, 'index']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/create/cita', [AppoinmentController::class, 'store']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/update/cita/{cita}', [AppoinmentController::class, 'update']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delete('/eliminar/cita/{cita}', [AppoinmentController::class, 'delete']);
 
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('/show/suscripcion/{user}', [SuscriptionController::class, 'show']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('/disable/suscripcion/{user}', [SuscriptionController::class, 'disable']);

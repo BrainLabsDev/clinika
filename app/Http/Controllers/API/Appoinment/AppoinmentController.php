@@ -14,22 +14,22 @@ class AppoinmentController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/show-history/cita-control/{user}",
-     *     summary="Mostrando historial de cita de control del cliente",
-     *     operationId="showHistorialCitaControlUser",
-     *     tags={"cita-control"},
+     *     path="/api/show-history/cita/{patience_id}",
+     *     summary="Mostrando historial de citas del paciente",
+     *     operationId="showAllCitaPatience",
+     *     tags={"cita"},
      *     security={ {"sanctum": {} }},
      *     @OA\Parameter(
-     *         name="user",
+     *         name="patience_id",
      *         in="path",
-     *         description="Id of User",
+     *         description="Id of patience",
      *         @OA\Schema(
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response=200, description="Showing history of citas of control of the Client"),
+     *     @OA\Response(response=200, description="Showing all apointments of the Patience"),
      *     @OA\Response(response=401, description="User not authenticated"),
-     *     @OA\Response(response=404, description="User not found"),
+     *     @OA\Response(response=404, description="Patience not found"),
      *     @OA\Response(
      *         response=500,
      *         description="Unexpected error",
@@ -49,7 +49,7 @@ class AppoinmentController extends Controller
             $msg = 'No hay citas de control';
         } else {
             $code = 200;
-            $msg = 'Mostrando historial de citas de control';
+            $msg = 'Mostrando historial de citas del paciente';
             $data = $citas;
         }
 
@@ -62,15 +62,23 @@ class AppoinmentController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/show/cita-control/{user}",
-     *     summary="Mostrando cita de control del cliente",
-     *     operationId="showCitaControlUser",
-     *     tags={"cita-control"},
+     *     path="/api/show/cita/{patience_id}/{appointment_id}",
+     *     summary="Mostrando cita del cliente",
+     *     operationId="showCitaPatience",
+     *     tags={"cita"},
      *     security={ {"sanctum": {} }},
      *     @OA\Parameter(
-     *         name="user",
+     *         name="patience_id",
      *         in="path",
-     *         description="Id of User",
+     *         description="Id of the Patience",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="appointment_id",
+     *         in="path",
+     *         description="Id of the Appointment",
      *         @OA\Schema(
      *             type="integer"
      *         )
@@ -85,77 +93,59 @@ class AppoinmentController extends Controller
      *     )
      * )
      */
-    public function show(User $user)
+    public function show(User $user, $id)
     {
-        $code = 500;
-        $msg = 'Error inesperado';
-        $data = null;
-
-        $cita = Appoinment::where('client_id', $user->id)->orderByDesc('date')->first();
-        if ($cita == null) {
-            $code = 404;
-            $msg = 'No hay citas de control';
-        } else {
-            $code = 200;
-            $msg = 'Mostrando cita de control actual';
-            $data = $cita;
-        }
+        $code = 200;
+        $msg = 'Mostrando cita actual';
+        $cita = Appoinment::where('client_id', $user->id)->where('id', $id)->first();
 
         return response()->json([
             'code' => $code,
             'msg' => $msg,
-            'data' => $data,
+            'data' => $cita,
         ]);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/create/cita-control",
-     *     summary="Crear cita de control",
-     *     operationId="createCitaControl",
-     *     tags={"cita-control"},
+     *     path="/api/create/cita",
+     *     summary="Crear cita",
+     *     operationId="createCita",
+     *     tags={"cita"},
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\RequestBody(
      *       @OA\MediaType(
      *           mediaType="multipart/form-data",
      *           @OA\Schema(
      *               type="object",
-     *               @OA\Property(
-     *                  property="peso",
-     *                  type="integer"
-     *               ),
-     *               @OA\Property(
-     *                  property="musculo",
-     *                  type="integer"
-     *               ),
-     *               @OA\Property(
-     *                  property="grasas",
-     *                  type="integer"
-     *               ),
      *              @OA\Property(
-     *                  property="porcentaje_grasa",
-     *                  type="integer"
-     *               ),
-     *              @OA\Property(
-     *                  property="cc",
-     *                  type="integer"
+     *                  property="fecha_consulta",
+     *                  type="date"
      *              ),
      *              @OA\Property(
-     *                  property="grasa_viceral",
-     *                  type="integer"
-     *              ),
-     *              @OA\Property(
-     *                  property="evolucion",
+     *                  property="hora_start",
      *                  type="string"
      *              ),
      *              @OA\Property(
-     *                  property="cliente_id",
+     *                  property="hora_end",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="paciente_id",
+     *                  type="integer"
+     *              ),
+     *              @OA\Property(
+     *                  property="clinica_id",
+     *                  type="integer"
+     *              ),
+     *              @OA\Property(
+     *                  property="nutriologo_id",
      *                  type="integer"
      *              ),
      *           ),
      *       )
      *     ),
-     *     @OA\Response(response=200, description="Cita de control created"),
+     *     @OA\Response(response=200, description="Cita created"),
      *     @OA\Response(response=422, description="Validation rules failed"),
      *     @OA\Response(
      *         response=500,
@@ -167,29 +157,26 @@ class AppoinmentController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'peso' => 'required',
-            'musculo' => 'required',
-            'grasas' => 'required',
-            'porcentaje_grasa' => 'required',
-            'cc' => 'required',
-            'grasa_viceral' => 'required',
-            'cliente_id' => 'required|string',
+            'fecha_consulta' => 'required',
+            'hora_start' => 'required',
+            'hora_end' => 'required',
+            'paciente_id' => 'required',
+            'clinica_id' => 'required',
+            'nutriologo_id' => 'required',
         ];
 
         $messages = [
-            'peso.required' => 'El peso es requerido',
-            'musculo.required' => 'El porcentaje de musculo es requerido',
-            'grasas.required' => 'El porcentaje de grasas es requerido',
-            'porcentaje_grasa.required' => 'El porcentaje de grasa es requerido',
-            'cc.required' => 'El CC es requerido',
-            'grasa_viceral.required' => 'El porcentaje de grasa visceral es requerido',
-            'cliente_id.required' => 'El cliente es requerido',
-            'cliente_id.string' => 'El cliente debe ser un número',
+            'fecha_consulta.required' => 'La fecha de la cita es requerida',
+            'hora_start.required' => 'La hora de inicio de la cita es requerido',
+            'hora_end.required' => 'La hora de finalizacion de la cita es requerido',
+            'paciente_id.required' => 'El identificador del paciente es requerido',
+            'clinica_id.required' => 'El identificador del consultorio es requerido',
+            'nutriologo_id.required' => 'El identificador de la nutriologa es requerido'
         ];
 
         $this->validate($request, $rules, $messages);
 
-        $cliente = User::find($request->cliente_id);
+        $cliente = User::find($request->paciente_id);
         if ($cliente == null) {
             return response()->json([
                 'code' => 404,
@@ -206,7 +193,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $nutricionista = User::find($request->nutricionista_id);
+        $nutricionista = User::find($request->nutriologo_id);
         if ($nutricionista == null) {
             return response()->json([
                 'code' => 404,
@@ -215,7 +202,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $consultorio = Room::find($request->consultorio_id);
+        $consultorio = Room::find($request->clinica_id);
         if ($consultorio == null) {
             return response()->json([
                 'code' => 404,
@@ -249,18 +236,10 @@ class AppoinmentController extends Controller
 
         $cita = new Appoinment();
         $cita->date = ($request->filled('fecha_consulta')) ? $request->fecha_consulta : now();
-        $cita->weight = (double) $request->peso;
-        $cita->muscle = (double) $request->musculo;
-        $cita->fat = (double) $request->grasas;
-        $cita->average_fat = (double) $request->porcentaje_grasa;
-        $cita->cc = (double) $request->cc;
-        $cita->viseral_fat = (double) $request->grasa_viceral;
-        $cita->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : null;
-        $cita->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : null;
-        $cita->additional_notes = ($request->filled('notas_adicionales')) ? $request->notas_adicionales : null;
+        $cita->notes = ($request->filled('notas')) ? $request->notas : null;
         $cita->video_call_url = ($request->filled('videoconferencia')) ? $request->videoconferencia : null;
-        $cita->start_time = ($request->filled('hora_inicio')) ? $request->hora_inicio : null;
-        $cita->end_time = ($request->filled('hora_termino')) ? $request->hora_termino : null;
+        $cita->start_time = ($request->filled('hora_start')) ? $request->hora_start : null;
+        $cita->end_time = ($request->filled('hora_end')) ? $request->hora_end : null;
         $cita->google_calendar = ($request->filled('google_calendar')) ? $request->google_calendar : null;
         $cita->status = ($request->filled('estado_consulta')) ? $request->estado_consulta : 'No Confirmado';
         $cita->client_id = $cliente->id;
@@ -274,7 +253,7 @@ class AppoinmentController extends Controller
             'data' => [
                 'cita' => $cita,
                 'cliente' => $cliente,
-                'suscripcion' => $cliente->suscripcion,
+                'clinica' => $consultorio,
                 'nutricionista' => $nutricionista,
             ]
         ]);
@@ -282,15 +261,15 @@ class AppoinmentController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/update/cita-control/{cita}",
-     *     summary="Actualizar cita de control",
-     *     operationId="updateCitaControl",
-     *     tags={"cita-control"},
+     *     path="/api/update/cita/{cita}",
+     *     summary="Actualizar cita",
+     *     operationId="updateCita",
+     *     tags={"cita"},
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Parameter(
      *         name="cita",
      *         in="path",
-     *         description="Id of the Cita de Control",
+     *         description="Id of the Cita",
      *         @OA\Schema(
      *             type="integer"
      *         )
@@ -301,35 +280,27 @@ class AppoinmentController extends Controller
      *           @OA\Schema(
      *               type="object",
      *               @OA\Property(
-     *                  property="peso",
-     *                  type="integer"
-     *               ),
-     *               @OA\Property(
-     *                  property="musculo",
-     *                  type="integer"
-     *               ),
-     *               @OA\Property(
-     *                  property="grasas",
-     *                  type="integer"
-     *               ),
-     *              @OA\Property(
-     *                  property="porcentaje_grasa",
-     *                  type="integer"
-     *               ),
-     *              @OA\Property(
-     *                  property="cc",
-     *                  type="integer"
+     *                  property="fecha_consulta",
+     *                  type="date"
      *              ),
      *              @OA\Property(
-     *                  property="grasa_viceral",
-     *                  type="integer"
-     *              ),
-     *              @OA\Property(
-     *                  property="evolucion",
+     *                  property="hora_start",
      *                  type="string"
      *              ),
      *              @OA\Property(
-     *                  property="cliente_id",
+     *                  property="hora_end",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="paciente_id",
+     *                  type="integer"
+     *              ),
+     *              @OA\Property(
+     *                  property="clinica_id",
+     *                  type="integer"
+     *              ),
+     *              @OA\Property(
+     *                  property="nutriologo_id",
      *                  type="integer"
      *              ),
      *           ),
@@ -347,29 +318,26 @@ class AppoinmentController extends Controller
     public function update(Request $request, Appoinment $cita)
     {
         $rules = [
-            'peso' => 'required',
-            'musculo' => 'required',
-            'grasas' => 'required',
-            'porcentaje_grasa' => 'required',
-            'cc' => 'required',
-            'grasa_viceral' => 'required',
-            'cliente_id' => 'required',
+            'fecha_consulta' => 'required',
+            'hora_start' => 'required',
+            'hora_end' => 'required',
+            'paciente_id' => 'required',
+            'clinica_id' => 'required',
+            'nutriologo_id' => 'required',
         ];
 
         $messages = [
-            'peso.required' => 'El peso es requerido',
-            'musculo.required' => 'El porcentaje de musculo es requerido',
-            'grasas.required' => 'El porcentaje de grasas es requerido',
-            'porcentaje_grasa.required' => 'El porcentaje de grasa es requerido',
-            'cc.required' => 'El CC es requerido',
-            'grasa_viceral.required' => 'El porcentaje de grasa visceral es requerido',
-            'evolucion.required' => 'La evolución es requerida',
-            'cliente_id.required' => 'El cliente es requerido',
+            'fecha_consulta.required' => 'La fecha de la cita es requerida',
+            'hora_start.required' => 'La hora de inicio de la cita es requerido',
+            'hora_end.required' => 'La hora de finalizacion de la cita es requerido',
+            'paciente_id.required' => 'El identificador del paciente es requerido',
+            'clinica_id.required' => 'El identificador del consultorio es requerido',
+            'nutriologo_id.required' => 'El identificador de la nutriologa es requerido'
         ];
 
         $this->validate($request, $rules, $messages);
 
-        $cliente = User::find($request->cliente_id);
+        $cliente = User::find($request->paciente_id);
         if ($cliente == null) {
             return response()->json([
                 'code' => 404,
@@ -378,7 +346,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $nutricionista = User::find($request->nutricionista_id);
+        $nutricionista = User::find($request->nutriologo_id);
         if ($nutricionista == null) {
             return response()->json([
                 'code' => 404,
@@ -387,7 +355,7 @@ class AppoinmentController extends Controller
             ]);
         }
 
-        $consultorio = Room::find($request->consultorio_id);
+        $consultorio = Room::find($request->clinica_id);
         if ($consultorio == null) {
             return response()->json([
                 'code' => 404,
@@ -415,18 +383,10 @@ class AppoinmentController extends Controller
 
 
         $cita->date = ($request->filled('fecha_consulta')) ? $request->fecha_consulta : now();
-        $cita->weight = (double) $request->peso;
-        $cita->muscle = (double) $request->musculo;
-        $cita->fat = (double) $request->grasas;
-        $cita->average_fat = (double) $request->porcentaje_grasa;
-        $cita->cc = (double) $request->cc;
-        $cita->viseral_fat = (double) $request->grasa_viceral;
-        $cita->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : null;
-        $cita->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : null;
-        $cita->additional_notes = ($request->filled('notas_adicionales')) ? $request->notas_adicionales : null;
+        $cita->notes = ($request->filled('notas')) ? $request->notas : null;
         $cita->video_call_url = ($request->filled('videoconferencia')) ? $request->videoconferencia : null;
-        $cita->start_time = ($request->filled('hora_inicio')) ? $request->hora_inicio : null;
-        $cita->end_time = ($request->filled('hora_termino')) ? $request->hora_termino : null;
+        $cita->start_time = ($request->filled('hora_start')) ? $request->hora_start : null;
+        $cita->end_time = ($request->filled('hora_end')) ? $request->hora_end : null;
         $cita->google_calendar = ($request->filled('google_calendar')) ? $request->google_calendar : null;
         $cita->status = ($request->filled('estado_consulta')) ? $request->estado_consulta : 'No Confirmado';
         $cita->client_id = $cliente->id;
@@ -448,21 +408,21 @@ class AppoinmentController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/eliminar/cita-control/{cita}",
-     *     summary="Delete cita de control",
-     *     operationId="deleteCitaControl",
-     *     tags={"cita-control"},
+     *     path="/api/eliminar/cita/{cita}",
+     *     summary="Delete cita",
+     *     operationId="deleteCita",
+     *     tags={"cita"},
      *     security={ {"sanctum": {} }},
      *     @OA\Parameter(
      *         name="cita",
      *         in="path",
-     *         description="Id of the cita control",
+     *         description="Id of the cita",
      *         @OA\Schema(
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response=200, description="Cita control deleted succesfully"),
-     *     @OA\Response(response=404, description="Cita control not found"),
+     *     @OA\Response(response=200, description="Cita deleted succesfully"),
+     *     @OA\Response(response=404, description="Cita not found"),
      *     @OA\Response(
      *         response=500,
      *         description="Unexpected error",
@@ -470,19 +430,19 @@ class AppoinmentController extends Controller
      *     )
      * )
     */
-    public function deleteCita(Appoinment $cita)
+    public function delete(Appoinment $cita)
     {
-        $equivalencia = NutritionEquivalent::where('appointment_id', $cita->id)->first();
+        /*$equivalencia = NutritionEquivalent::where('appointment_id', $cita->id)->first();
 
         if ($equivalencia != null) {
             $equivalencia->delete();
-        }
+        }*/
 
         $cita->delete();
 
         return response()->json([
             'code' => 200,
-            'msg' => 'Cita de control borrada exitosamente',
+            'msg' => 'Cita borrada exitosamente',
             'data' => null
         ]);
     }
