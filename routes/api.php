@@ -62,6 +62,7 @@ Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista'])->get(
 
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario', EnsureSuscriptionIsValid::class])->get('/show/cita/{user}/{id}', [AppoinmentController::class, 'show']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario', EnsureSuscriptionIsValid::class])->get('/show-history/citas/{user}', [AppoinmentController::class, 'index']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista', EnsureSuscriptionIsValid::class])->get('/show/all-citas/{fecha_consulta?}', [AppoinmentController::class, 'showAll']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/create/cita', [AppoinmentController::class, 'store']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/update/cita/{cita}', [AppoinmentController::class, 'update']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delete('/eliminar/cita/{cita}', [AppoinmentController::class, 'delete']);

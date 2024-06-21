@@ -107,6 +107,57 @@ class AppoinmentController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *     path="/api/show/all-citas",
+     *     summary="Mostrando cita del cliente",
+     *     operationId="showCitaPatience",
+     *     tags={"cita"},
+     *     security={ {"sanctum": {} }},
+     *     @OA\Parameter(
+     *         name="patience_id",
+     *         in="path",
+     *         description="Id of the Patience",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="appointment_id",
+     *         in="path",
+     *         description="Id of the Appointment",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Showing cita of control of the Client"),
+     *     @OA\Response(response=401, description="User not authenticated"),
+     *     @OA\Response(response=404, description="User not found"),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+    */
+    public function showAll($fecha_consulta = null)
+    {
+        $code = 200;
+        $msg = 'Mostrando las citas';
+        if ($fecha_consulta != null) {
+            $citas = Appoinment::whereDate('date', $fecha_consulta)->get();
+        } else {
+            $citas = Appoinment::all();
+        }
+       
+
+        return response()->json([
+            'code' => $code,
+            'msg' => $msg,
+            'data' => $citas,
+        ]);
+    }
+
+    /**
      * @OA\Post(
      *     path="/api/create/cita",
      *     summary="Crear cita",
