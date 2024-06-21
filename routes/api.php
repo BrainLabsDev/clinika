@@ -6,6 +6,7 @@ use App\Http\Controllers\API\User\UserController;
 use App\Http\Controllers\API\Rol\RolController;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Appoinment\AppoinmentController;
+use App\Http\Controllers\API\Appoinment\RecordsController;
 use App\Http\Controllers\API\Product\ProductController;
 use App\Http\Controllers\API\Category\CategoryController;
 use App\Http\Controllers\API\Medical\MedicalConditionsController;
@@ -64,6 +65,12 @@ Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario',
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/create/cita', [AppoinmentController::class, 'store']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/update/cita/{cita}', [AppoinmentController::class, 'update']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delete('/eliminar/cita/{cita}', [AppoinmentController::class, 'delete']);
+
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario', EnsureSuscriptionIsValid::class])->get('/show/history-cita-control/{user}', [RecordsController::class, 'index']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista|Usuario', EnsureSuscriptionIsValid::class])->get('/show/cita-control/{user}/{cita_id}', [RecordsController::class, 'show']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/create/cita-control', [RecordsController::class, 'store']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->post('/update/cita-control/{cita}', [RecordsController::class, 'update']);
+Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->delete('/eliminar/cita-control/{cita}', [RecordsController::class, 'delete']);
 
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('/show/suscripcion/{user}', [SuscriptionController::class, 'show']);
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista'])->get('/disable/suscripcion/{user}', [SuscriptionController::class, 'disable']);

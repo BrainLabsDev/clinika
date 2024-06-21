@@ -36,7 +36,7 @@ class AppoinmentController extends Controller
      *         @OA\Schema(ref="#/components/schemas/Error")
      *     )
      * )
-     */
+    */
     public function index(User $user)
     {
         $code = 500;
@@ -92,7 +92,7 @@ class AppoinmentController extends Controller
      *         @OA\Schema(ref="#/components/schemas/Error")
      *     )
      * )
-     */
+    */
     public function show(User $user, $id)
     {
         $code = 200;
