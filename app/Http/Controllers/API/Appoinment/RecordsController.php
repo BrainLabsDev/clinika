@@ -186,6 +186,7 @@ class RecordsController extends Controller
         $record->viseral_fat = ($request->filled('grasa_viseral')) ? $request->grasa_viseral : null;
         $record->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : null;
         $record->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : null;
+        $record->height = ($request->filled('estatura')) ? $request->height : 0.0;
         $subcategory = Subcategory::find($request->consumo_agua_id);
         if ($subcategory == null) {
             return response()->json([
@@ -205,7 +206,7 @@ class RecordsController extends Controller
         ]);
     }
 
-    public function update(Request $request, Record $record)
+    public function update(Request $request, $id)
     {
         $rules = [
             'fecha' => 'required',
@@ -229,6 +230,7 @@ class RecordsController extends Controller
 
         $this->validate($request, $rules, $messages);
 
+        $record = Record::find($id);
         $user = User::find($request->cliente_id);
         if ($user == null) {
             return response()->json([
@@ -238,16 +240,17 @@ class RecordsController extends Controller
             ]);
         }
 
-        $record->date = ($request->filled('fecha')) ? $request->fecha : now();
-        $record->weight = ($request->filled('peso')) ? $request->peso : null;
-        $record->muscle = ($request->filled('musculo')) ? $request->musculo : null;
-        $record->fat = ($request->filled('grasa')) ? $request->grasa : null;
-        $record->average_fat = ($request->filled('porcentaje_grasa')) ? $request->porcentaje_grasa : null;
-        $record->cc = ($request->filled('cc')) ? $request->cc : null;
-        $record->excercise = ($request->filled('ejercicio')) ? $request->ejercicio : null;
-        $record->viseral_fat = ($request->filled('grasa_viseral')) ? $request->grasa_viseral : null;
-        $record->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : null;
-        $record->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : null;
+        $record->date = ($request->filled('fecha')) ? $request->fecha : $record->date;
+        $record->weight = ($request->filled('peso')) ? $request->peso : $record->weight;
+        $record->muscle = ($request->filled('musculo')) ? $request->musculo : $record->muscle;
+        $record->fat = ($request->filled('grasa')) ? $request->grasa : $record->fat;
+        $record->average_fat = ($request->filled('porcentaje_grasa')) ? $request->porcentaje_grasa : $record->average_fat;
+        $record->cc = ($request->filled('cc')) ? $request->cc : $record->cc;
+        $record->excercise = ($request->filled('ejercicio')) ? $request->ejercicio : $record->excercise;
+        $record->viseral_fat = ($request->filled('grasa_viseral')) ? $request->grasa_viseral : $record->viseral_fat;
+        $record->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : $record->notes_client;
+        $record->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : $record->notes_intern;
+        $record->height = ($request->filled('estatura')) ? $request->height : $record->height;
         $subcategory = Subcategory::find($request->consumo_agua_id);
         if ($subcategory == null) {
             return response()->json([
