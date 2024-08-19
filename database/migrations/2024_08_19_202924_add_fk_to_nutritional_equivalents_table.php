@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('nutritional_equivalents', function (Blueprint $table) {
-            $table->dropForeign(['record_id']);
+            $table->dropColumn(['record_id']);
             $table->unsignedBigInteger('appointment_id');
             $table->foreign('appointment_id')->references('id')->on('appointments');
         });
