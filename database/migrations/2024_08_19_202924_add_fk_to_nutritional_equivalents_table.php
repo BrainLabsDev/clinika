@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('nutritional_equivalents', function (Blueprint $table) {
-            $table->dropIndex(['appointment_id']); // Drops index 'appointment_id'
+            $table->dropUnique(['appointment_id']); // Drops index 'appointment_id'
             $table->dropColumn(['appointment_id']);
             $table->unsignedBigInteger('record_id');
             $table->foreign('record_id')->references('id')->on('records');
@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('nutritional_equivalents', function (Blueprint $table) {
-            $table->dropIndex(['record_id']); // Drops index 'record_id'
+            $table->dropUnique(['record_id']); // Drops index 'record_id'
             $table->dropColumn(['record_id']);
             $table->unsignedBigInteger('appointment_id');
             $table->foreign('appointment_id')->references('id')->on('appointments');
