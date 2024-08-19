@@ -186,7 +186,7 @@ class RecordsController extends Controller
         $record->viseral_fat = ($request->filled('grasa_viseral')) ? $request->grasa_viseral : null;
         $record->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : null;
         $record->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : null;
-        $record->height = ($request->filled('estatura')) ? $request->height : 0.0;
+        $record->height = ($request->filled('estatura')) ? $request->estatura : 0.0;
         $subcategory = Subcategory::find($request->consumo_agua_id);
         if ($subcategory == null) {
             return response()->json([
@@ -250,7 +250,7 @@ class RecordsController extends Controller
         $record->viseral_fat = ($request->filled('grasa_viseral')) ? $request->grasa_viseral : $record->viseral_fat;
         $record->notes_client = ($request->filled('notas_cliente')) ? $request->notas_cliente : $record->notes_client;
         $record->notes_intern = ($request->filled('notas_internas')) ? $request->notas_internas : $record->notes_intern;
-        $record->height = ($request->filled('estatura')) ? $request->height : $record->height;
+        $record->height = ($request->filled('estatura')) ? $request->estatura : $record->height;
         $subcategory = Subcategory::find($request->consumo_agua_id);
         if ($subcategory == null) {
             return response()->json([
