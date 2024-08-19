@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Record extends Model
 {
     use HasFactory;
+
+    public function equivalenciaNutricional()
+    {
+        return $this->hasOne(NutritionEquivalent::class);
+    }
 }

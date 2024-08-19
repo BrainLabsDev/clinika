@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\NutritionEquivalent;
 use App\Models\Appoinment;
+use App\Models\Record;
 use App\Models\User;
 
 class NutritionalEquivalentController extends Controller
@@ -204,9 +205,9 @@ class NutritionalEquivalentController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $citaControl = Appoinment::findOrFail($request->cita_control_id);
+        $record = Record::findOrFail($request->cita_control_id);
 
-        if ($citaControl->equivalenciaNutricional != null){
+        if ($record->equivalenciaNutricional != null){
             return response()->json([
                 'code' => 422,
                 'msg' => 'Ya existe una equivalencia nutricional para esta cita de control',
@@ -221,7 +222,7 @@ class NutritionalEquivalentController extends Controller
         $equivalencia_nutricional->mid_dinner = ($request->filled('media_tarde')) ? json_encode($request->media_tarde) : null;
         $equivalencia_nutricional->dinner = ($request->filled('cena')) ? json_encode($request->cena) : null;
         $equivalencia_nutricional->snack = ($request->filled('merienda_noche')) ? json_encode($request->merienda_noche) : null;
-        $equivalencia_nutricional->appointment_id = $citaControl->id;
+        $equivalencia_nutricional->record_id = $record->id;
         $equivalencia_nutricional->save();
 
         return response()->json([
