@@ -36,14 +36,14 @@ class NutritionalEquivalentController extends Controller
      *     )
      * )
     */
-    public function index(Appoinment $citaControl)
+    public function index(Record $record)
     {
-        $equivalencias_nutricionales = NutritionEquivalent::where('appointment_id',$citaControl->id)->get();
+        $equivalencias_nutricionales = NutritionEquivalent::where('appointment_id', $record->id)->get();
 
         if ($equivalencias_nutricionales->isEmpty()) {
             return response()->json([
                 'code' => 404,
-                'msg' => 'No se han encontrado equivalencias nutricionales para la cita de control con id: ' . $citaControl->id,
+                'msg' => 'No se han encontrado equivalencias nutricionales para la cita de control con id: ' . $record->id,
                 'data' => null
             ]);
         }
@@ -52,7 +52,7 @@ class NutritionalEquivalentController extends Controller
             'code' => 200,
             'msg' => 'Equivalencias nutricionales obtenidas correctamente',
             'data' => [
-                'cita_control' => $citaControl,
+                'cita_control' => $record,
                 'equivalencias_nutricionales' => $equivalencias_nutricionales
             ]
         ]);
@@ -361,8 +361,8 @@ class NutritionalEquivalentController extends Controller
         $equivalenciaNutricional->dinner = ($request->filled('cena')) ? json_encode($request->cena) : null;
         $equivalenciaNutricional->snack = ($request->filled('merienda_noche')) ? json_encode($request->merienda_noche) : null;
 
-        $citaControl = Appoinment::findOrFail($request->cita_control_id);
-        $equivalenciaNutricional->appointment_id = $citaControl->id;
+        $citaControl = Record::findOrFail($request->cita_control_id);
+        $equivalenciaNutricional->record_id = $citaControl->id;
         $equivalenciaNutricional->update();
 
         return response()->json([
