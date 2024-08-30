@@ -36,9 +36,10 @@ class NutritionalEquivalentController extends Controller
      *     )
      * )
     */
-    public function index(Record $record)
+    public function index($id)
     {
-        $equivalencias_nutricionales = NutritionEquivalent::where('appointment_id', $record->id)->get();
+        $record = Record::find($id);
+        $equivalencias_nutricionales = NutritionEquivalent::where('record_id', $record->id)->get();
 
         if ($equivalencias_nutricionales->isEmpty()) {
             return response()->json([

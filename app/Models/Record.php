@@ -9,6 +9,8 @@ class Record extends Model
 {
     use HasFactory;
 
+    protected $table = 'records';
+
     public function equivalenciaNutricional()
     {
         return $this->hasOne(NutritionEquivalent::class);
