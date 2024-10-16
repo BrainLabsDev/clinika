@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Jobs\UserCreatedJob;
@@ -18,12 +19,18 @@ use App\Models\Paypal;
 use App\Models\Room;
 use App\Models\Subcategory;
 use App\Models\User;
+use Illuminate\Support\Facades\Config;
 
 /**
 * @OA\Info(title="API App - Clinica", version="1.0")
 */
 class UserController extends Controller
 {
+    private $host;
+
+    public function __construct() {
+        $this->host = config('app.url');
+    }
     /**
      * @OA\Get(
      *     path="/api/show/user/{user}",
@@ -94,6 +101,7 @@ class UserController extends Controller
                 'cita' => [
                     'fecha' => ($cita != null) ? $cita->date : null,
                 ],
+                'archivos' => (Auth::user()->files != null) ? $this->host . Storage::url(json_decode(Auth::user()->files)) : null
             ];
 
             if ($medical_record != null && $medical_record->objective != null) {
@@ -193,7 +201,8 @@ class UserController extends Controller
                 'nutricionista' => ($nutricionista != null ) ? ['id' => $nutricionista->id, 'nombre' => $nutricionista->name] : 'Sin nutricionista asignado',
                 'cita' => [
                     'fecha' => ($cita != null) ? $cita->date : null,
-                ]
+                ],
+                'archivos' => ($user->files != null) ? $this->host . Storage::url(json_decode($user->files)) : null
             ];
 
             if ($user->room_id != null) {
@@ -342,6 +351,7 @@ class UserController extends Controller
                 'cita' => [
                     'fecha' => ($cita != null) ? $cita->date : null,
                 ],
+                'archivos' => ($cliente->files != null) ? $this->host . Storage::url(json_decode($cliente->files)) : null
             ];
 
             if ($medical_record != null && $medical_record->physical_activity != null) {
@@ -667,6 +677,11 @@ class UserController extends Controller
         $user->dni =($request->has('num_identificacion')) ? $request->num_identificacion : null;
         $user->profesion = ($request->has('profesion'))  ? $request->profesion : null;
         $user->residence = ($request->has('lugar_residencia')) ?  $request->lugar_residencia : null;
+        //Check if there is a file on the request
+        if ($request->has('archivo')) {
+            $path = Storage::disk('public')->put('files', $request->archivo, 'public');
+            $user->files = json_encode($path);
+        }
         
         $user->save();
         // We assign the default rol to the user
@@ -966,8 +981,14 @@ class UserController extends Controller
 
         $user->nutricionist_id = ($request->has('nutricionista_id') ? $nutricionista->id : null);
         $user->room_id = ($request->has('consultorio_id') ? $consultorio->id : null);
+        //Check if there is a file on the request
+        if ($request->has('archivo')) {
+            $path = Storage::disk('public')->put('files', $request->archivo, 'public');
+            $user->files = json_encode($path);
+        }
+        
         $user->update();
-        $medical_record->civil_status = ($request->filled('estado_civil') ? $request->estado_civil : $medical_record->civil_statu);
+        $medical_record->civil_status = ($request->filled('estado_civil')) ? $request->estado_civil : $medical_record->civil_status;
 
         if ($request->filled('consumo_alcohol_id')) {
             $subcategory = Subcategory::find($request->consumo_alcohol_id);
