@@ -100,9 +100,14 @@ class UserController extends Controller
                 ],
                 'cita' => [
                     'fecha' => ($cita != null) ? $cita->date : null,
-                ],
-                'archivos' => (Auth::user()->files != null) ? $this->host . Storage::url(json_decode(Auth::user()->files)) : null
+                ]
             ];
+
+            if (Auth::user()->files != 'null' && count(json_decode(Auth::user()->files)) > 0) {
+                foreach (json_decode(Auth::user()->files) as $file) {
+                    $user['archivos'][] = $this->host . Storage::url($file);
+                }
+            }
 
             if ($medical_record != null && $medical_record->objective != null) {
                 $subcategory = Subcategory::find($medical_record->objective);
@@ -201,9 +206,14 @@ class UserController extends Controller
                 'nutricionista' => ($nutricionista != null ) ? ['id' => $nutricionista->id, 'nombre' => $nutricionista->name] : 'Sin nutricionista asignado',
                 'cita' => [
                     'fecha' => ($cita != null) ? $cita->date : null,
-                ],
-                'archivos' => ($user->files != null) ? $this->host . Storage::url(json_decode($user->files)) : null
+                ]
             ];
+
+            if ($user->files != 'null' && count(json_decode($user->files)) > 0) {
+                foreach (json_decode($user->files) as $file) {
+                    $usuario['archivos'][] = $this->host . Storage::url($file);
+                }
+            }
 
             if ($user->room_id != null) {
                 $usuario['consultorio'] = [
@@ -350,9 +360,14 @@ class UserController extends Controller
                 ],
                 'cita' => [
                     'fecha' => ($cita != null) ? $cita->date : null,
-                ],
-                'archivos' => ($cliente->files != null) ? $this->host . Storage::url(json_decode($cliente->files)) : null
+                ]
             ];
+
+            if ($cliente->files != 'null' && count(json_decode($cliente->files)) > 0) {
+                foreach (json_decode($cliente->files) as $file) {
+                    $user['archivos'][] = $this->host . Storage::url($file);
+                }
+            }
 
             if ($medical_record != null && $medical_record->physical_activity != null) {
                 $subcategory = Subcategory::find($medical_record->physical_activity);
@@ -678,11 +693,15 @@ class UserController extends Controller
         $user->profesion = ($request->has('profesion'))  ? $request->profesion : null;
         $user->residence = ($request->has('lugar_residencia')) ?  $request->lugar_residencia : null;
         //Check if there is a file on the request
-        if ($request->has('archivo')) {
-            $path = Storage::disk('public')->put('files', $request->archivo, 'public');
-            $user->files = json_encode($path);
+        if ($request->has('archivos')) {
+            foreach ($request->archivos as $archivo) {
+                $path = Storage::disk('public')->put('files', $archivo, 'public');
+                array_push($paths, $path);
+            }
+            
+            $user->files = json_encode($paths);
         }
-        
+
         $user->save();
         // We assign the default rol to the user
         $user->assignRole('Usuario');
@@ -982,9 +1001,14 @@ class UserController extends Controller
         $user->nutricionist_id = ($request->has('nutricionista_id') ? $nutricionista->id : null);
         $user->room_id = ($request->has('consultorio_id') ? $consultorio->id : null);
         //Check if there is a file on the request
-        if ($request->has('archivo')) {
-            $path = Storage::disk('public')->put('files', $request->archivo, 'public');
-            $user->files = json_encode($path);
+        $paths = array();
+        if ($request->has('archivos')) {
+            foreach ($request->archivos as $archivo) {
+                $path = Storage::disk('public')->put('files', $archivo, 'public');
+                array_push($paths, $path);
+            }
+            
+            $user->files = json_encode($paths);
         }
         
         $user->update();
