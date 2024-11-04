@@ -363,7 +363,7 @@ class UserController extends Controller
                 ]
             ];
 
-            if ($cliente->files != 'null' && count(json_decode($cliente->files)) > 0) {
+            if ($clientes->files != null && $cliente->files != 'null' && count(json_decode($cliente->files)) > 0) {
                 foreach (json_decode($cliente->files) as $file) {
                     $user['archivos'][] = $this->host . Storage::url($file);
                 }
