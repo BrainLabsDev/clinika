@@ -103,7 +103,7 @@ class UserController extends Controller
                 ]
             ];
 
-            if (Auth::user()->files != 'null' && count(json_decode(Auth::user()->files)) > 0) {
+            if (Auth::user()->files != null && Auth::user()->files != 'null' && count(json_decode(Auth::user()->files)) > 0) {
                 foreach (json_decode(Auth::user()->files) as $file) {
                     $user['archivos'][] = $this->host . Storage::url($file);
                 }
@@ -209,7 +209,7 @@ class UserController extends Controller
                 ]
             ];
 
-            if ($user->files != 'null' && count(json_decode($user->files)) > 0) {
+            if ($user->files != null && $user->files != 'null' && count(json_decode($user->files)) > 0) {
                 foreach (json_decode($user->files) as $file) {
                     $usuario['archivos'][] = $this->host . Storage::url($file);
                 }
@@ -363,7 +363,7 @@ class UserController extends Controller
                 ]
             ];
 
-            if ($clientes->files != null && $cliente->files != 'null' && count(json_decode($cliente->files)) > 0) {
+            if ($cliente->files != null && $cliente->files != 'null' && count(json_decode($cliente->files)) > 0) {
                 foreach (json_decode($cliente->files) as $file) {
                     $user['archivos'][] = $this->host . Storage::url($file);
                 }
