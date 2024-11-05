@@ -1007,7 +1007,10 @@ class UserController extends Controller
                 $path = Storage::disk('public')->put('files', $archivo, 'public');
                 array_push($paths, $path);
             }
-            
+            //We need to extract preview files in order to not lose them
+            if ($user->files != null && $user->files != '' && count(json_decode($user->files)) >= 1) {
+                $paths = array_merge(json_decode($user->files), $paths);
+            }
             $user->files = json_encode($paths);
         }
         
