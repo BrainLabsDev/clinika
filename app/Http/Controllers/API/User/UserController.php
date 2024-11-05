@@ -698,6 +698,7 @@ class UserController extends Controller
             foreach ($request->archivos as $archivo) {
                 $path = Storage::disk('public')->put('files', $archivo, 'public');
                 array_push($paths, $path);
+                dd($paths);
             }
             
             $user->files = json_encode($paths);
