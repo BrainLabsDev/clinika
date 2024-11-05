@@ -693,6 +693,7 @@ class UserController extends Controller
         $user->profesion = ($request->has('profesion'))  ? $request->profesion : null;
         $user->residence = ($request->has('lugar_residencia')) ?  $request->lugar_residencia : null;
         //Check if there is a file on the request
+        $paths = array();
         if ($request->has('archivos')) {
             foreach ($request->archivos as $archivo) {
                 $path = Storage::disk('public')->put('files', $archivo, 'public');
