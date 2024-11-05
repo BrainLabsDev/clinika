@@ -695,6 +695,7 @@ class UserController extends Controller
         //Check if there is a file on the request
         $paths = array();
         if ($request->has('archivos')) {
+            dd($request->archivos);
             foreach ($request->archivos as $archivo) {
                 $path = Storage::disk('public')->put('files', $archivo, 'public');
                 array_push($paths, $path);
