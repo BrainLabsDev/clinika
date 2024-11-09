@@ -1445,33 +1445,37 @@ class UserController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        //Check if there is a file on the request
-        $paths = array();
-        if ($request->has('archivos')) {
-            foreach ($request->archivos as $archivo) {
-                $path = Storage::disk('public')->put('files', $archivo, 'public');
-                array_push($paths, $path);
-            }
-            //We need to extract preview files in order to not lose them
-            if ($user->files != null && $user->files != '' && count(json_decode($user->files)) >= 1) {
-                $paths = array_merge(json_decode($user->files), $paths);
-            }
-            $user->files = json_encode($paths);
-        }
-        
-        $user->update();
-
         $data = null;
+        $msg = 'Usario no permitido para subir imagenes';
 
-        if ($user->files != null && $user->files != 'null' && count(json_decode($user->files)) > 0) {
-            foreach (json_decode($user->files) as $file) {
-                $data['archivos'][] = $this->host . Storage::url($file);
+        if ($user->hasRole('Usuario')) {
+            //Check if there is a file on the request
+            $paths = array();
+            if ($request->has('archivos')) {
+                foreach ($request->archivos as $archivo) {
+                    $path = Storage::disk('public')->put('files', $archivo, 'public');
+                    array_push($paths, $path);
+                }
+                //We need to extract preview files in order to not lose them
+                if ($user->files != null && $user->files != '' && count(json_decode($user->files)) >= 1) {
+                    $paths = array_merge(json_decode($user->files), $paths);
+                }
+                $user->files = json_encode($paths);
+                $msg = "Se agregaron los archivos exitosamente.";
+            }
+            
+            $user->update();
+
+            if ($user->files != null && $user->files != 'null' && count(json_decode($user->files)) > 0) {
+                foreach (json_decode($user->files) as $file) {
+                    $data['archivos'][] = $this->host . Storage::url($file);
+                }
             }
         }
 
         return response()->json([
             'code' => 200,
-            'msg' => 'Se agregaron los archivos exitosamente.',
+            'msg' => $msg,
             'data' => $data
         ]);
 
