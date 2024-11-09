@@ -1440,8 +1440,8 @@ class UserController extends Controller
 
     public function uploadFiles(Request $request, User $user) {
 
-        $rules = ['files' => 'required'];
-        $messages = ['files.required' => 'Es necesario subir archivos'];
+        $rules = ['achivos' => 'required'];
+        $messages = ['archivos.required' => 'Es necesario subir archivos'];
 
         $this->validate($request, $rules, $messages);
 
