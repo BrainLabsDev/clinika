@@ -47,6 +47,7 @@ Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista'])->post
 Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista|Usuario'])->get('/show/nutricionistas', [UserController::class, 'showNutricionistas']);
 Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista|Usuario'])->get('/show/user/{user}', [UserController::class, 'show']);
 Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista'])->delete('/delete/user/{user}', [UserController::class, 'delete']);
+Route::middleware(['auth:sanctum', 'role:SuperAdmin|Admin|Nutricionista'])->post('/update/user-files/{user}', [UserController::class, 'uploadFiles']);
 Route::middleware(['auth:sanctum'])->get('/logout', [LoginController::class, 'logout']);
 
 Route::middleware(['auth:sanctum','role:SuperAdmin|Admin|Nutricionista', EnsureSuscriptionIsValid::class])->get('/consultorios', [RoomController::class, 'index']);

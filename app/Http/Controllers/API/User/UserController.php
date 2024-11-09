@@ -1437,4 +1437,43 @@ class UserController extends Controller
             'data' => $data
         ]);
     }
+
+    public function uploadFiles(Request $request, User $user) {
+
+        $rules = ['files' => 'required'];
+        $messages = ['files.required' => 'Es necesario subir archivos'];
+
+        $this->validate($request, $rules, $messages);
+
+        //Check if there is a file on the request
+        $paths = array();
+        if ($request->has('archivos')) {
+            foreach ($request->archivos as $archivo) {
+                $path = Storage::disk('public')->put('files', $archivo, 'public');
+                array_push($paths, $path);
+            }
+            //We need to extract preview files in order to not lose them
+            if ($user->files != null && $user->files != '' && count(json_decode($user->files)) >= 1) {
+                $paths = array_merge(json_decode($user->files), $paths);
+            }
+            $user->files = json_encode($paths);
+        }
+        
+        $user->update();
+
+        $data = null;
+
+        if ($user->files != null && $user->files != 'null' && count(json_decode($user->files)) > 0) {
+            foreach (json_decode($user->files) as $file) {
+                $data['archivos'][] = $this->host . Storage::url($file);
+            }
+        }
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'Se agregaron los archivos exitosamente.',
+            'data' => $data
+        ]);
+
+    }
 }
