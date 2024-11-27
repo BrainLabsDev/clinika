@@ -1453,7 +1453,9 @@ class UserController extends Controller
             $paths = array();
             if ($request->has('archivos')) {
                 foreach ($request->archivos as $archivo) {
-                    $path = Storage::disk('public')->put('files', $archivo, 'public');
+                    $filename = $archivo->getClientOriginalName();
+                    $path = $archivo->storeAs('files', $filename, 'public');
+                    //$path = Storage::disk('public')->put('files', $archivo, 'public');
                     array_push($paths, $path);
                 }
                 //We need to extract preview files in order to not lose them
