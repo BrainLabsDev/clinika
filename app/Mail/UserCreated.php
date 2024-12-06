@@ -31,7 +31,7 @@ class UserCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('info@nutriapp.com', 'Soporte Nutricionista'),
+            from: new Address('info@clinika.com', 'Soporte Clinika'),
             subject: 'Cuenta Creada',
         );
     }
