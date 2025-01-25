@@ -1355,7 +1355,7 @@ class UserController extends Controller
             $user_deleted = "Nutriolog@";
   
         } else if ($user->hasRole('Usuario')) {
-            $citas = Appoinment::where('client_id', $user->id)->get();
+            $citas = MedicalRecord::where('user_id', $user->id)->get();
             if (!$citas->isEmpty()) {
                 foreach ($citas as $key => $cita) {
                     $cita->delete();
