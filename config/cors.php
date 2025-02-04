@@ -33,7 +33,9 @@ return [
         'https://clinika:8890',
         'http://clinika:8890',
         'https://adharaexpress.com.mx',
-        'https://app-clinika-mobile.netlify.app'
+        'https://app-clinika-mobile.netlify.app',
+        'https://clinika.ai',
+        'https://www.clinika.ai'
     ],
 
     'allowed_origins_patterns' => [],
