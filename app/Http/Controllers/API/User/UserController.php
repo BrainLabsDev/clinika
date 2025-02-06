@@ -1239,7 +1239,7 @@ class UserController extends Controller
         $user->birthday = ($request->has('fecha_nacimiento')) ? $request->fecha_nacimiento : $user->birthday;
         $user->rol = $request->rol;
         $user->nutricionist_id = null;
-        $user->consultorio_id = null;
+        $user->room_id = null;
         $user->dni = null;
         $user->profesion = null;
         $user->residence = null;
