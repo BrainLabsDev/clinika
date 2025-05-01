@@ -166,7 +166,8 @@ class RecordsController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $user = User::find($request->cliente_id);
+        $client_id = (int) $request->cliente_id;
+        $user = User::find($client_id);
         if ($user == null) {
             return response()->json([
                 'code' => 404,
