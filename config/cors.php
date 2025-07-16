@@ -36,7 +36,9 @@ return [
         'https://adharaexpress.com.mx',
         'https://app-clinika-mobile.netlify.app',
         'https://clinika.ai',
-        'https://www.clinika.ai'
+        'http://clinika.ai',
+        'https://www.clinika.ai',
+        'http://www.clinika.ai'
     ],
 
     'allowed_origins_patterns' => [],
